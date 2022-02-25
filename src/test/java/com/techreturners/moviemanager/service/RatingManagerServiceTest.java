@@ -25,7 +25,7 @@ public class RatingManagerServiceTest {
     private RatingManagerServiceImpl ratingManagerService;
 
     @Test
-    public void testGetAllRatingsReturnsListOfRatings() throws Exception {
+    public void testGetAllRatingsReturnsListOfRatings()  {
 
         List<Rating> ratings = new ArrayList<>();
         ratings.add(new Rating(1L, 1L, 1L,1L,1L,1.0));
@@ -42,7 +42,7 @@ public class RatingManagerServiceTest {
     }
 
     @Test
-    public void testAddARating() throws Exception {
+    public void testAddARating() {
 
         var rating = new Rating(4L, 4L, 4L,4L,4L,4.0);
 
@@ -54,7 +54,7 @@ public class RatingManagerServiceTest {
     }
 
     @Test
-    public void testGetRatingById() throws Exception {
+    public void testGetRatingById(){
 
         Long ratingId = 5L;
         var Rating = new Rating(5L, 5L, 5L,5L,5L,5.0);
@@ -67,7 +67,7 @@ public class RatingManagerServiceTest {
     }
 
     @Test
-    public void testUpdateRatingById() throws Exception {
+    public void testUpdateRatingById() {
 
         Long RatingId = 5L;
         var rating = new Rating(5L, 5L, 5L,5L,5L,5.0);
@@ -80,7 +80,7 @@ public class RatingManagerServiceTest {
         verify(mockRatingManagerRepository, times(1)).save(rating);
     }
     @Test
-    public void testDeleteRatingById() throws Exception {
+    public void testDeleteRatingById() {
         //add
         Long ratingId = 5L;
         var rating = new Rating(5L, 5L, 5L,5L,5L,5.0);

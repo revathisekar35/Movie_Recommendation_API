@@ -19,13 +19,13 @@ public class Rating {
     @Id
     @GeneratedValue
     @Column(updatable = false, nullable = false,name="ID")
-    Long ID;
+    Long Id;
 
     @Column
-    Long userID;
+    Long userId;
 
     @Column
-    Long movieID;
+    Long movieId;
 
     @Column
     Long likes;

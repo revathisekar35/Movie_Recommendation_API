@@ -37,7 +37,7 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 		Movie retrievedMovie = movieManagerRepository.findById(id).get();
 		retrievedMovie.setName(movie.getName());
 		retrievedMovie.setDescription(movie.getDescription());
-		retrievedMovie.setReleasYear(movie.getReleasYear());
+		retrievedMovie.setReleaseYear(movie.getReleaseYear());
 		movieManagerRepository.save(movie);
 	}
 

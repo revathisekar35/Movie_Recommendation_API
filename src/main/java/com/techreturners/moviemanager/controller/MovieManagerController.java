@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.techreturners.moviemanager.service.MovieManagerService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techreturners.moviemanager.model.Movie;
 
 @RestController
@@ -51,5 +55,17 @@ public class MovieManagerController {
 	public ResponseEntity<Movie> deleteMovieById(@PathVariable Long movieId) {
 		movieManagerService.deleteMovieById(movieId);
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@GetMapping({ "/actorName/{actorName}" })
+	public ResponseEntity<List<Movie>> getMovieByActor(@PathVariable String actorName) {
+		List<Movie> movies = movieManagerService.getMoviesByActor(actorName);
+		return new ResponseEntity<>(movies, HttpStatus.OK);
+	}
+
+	@GetMapping({ "/directorName/{directorName}" })
+	public ResponseEntity<List<Movie>> getMovieByDirector(@PathVariable String directorName) {
+		List<Movie> movies = movieManagerService.getMoviesByDirector(directorName);
+		return new ResponseEntity<>(movies, HttpStatus.OK);
 	}
 }

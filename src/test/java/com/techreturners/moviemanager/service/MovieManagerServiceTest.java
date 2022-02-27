@@ -21,70 +21,131 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.techreturners.moviemanager.repository.MovieManagerRepository;
 import com.techreturners.moviemanager.service.impl.MovieManagerServiceImpl;
 import com.techreturners.moviemanager.model.Movie;
+import com.techreturners.moviemanager.model.Person;
+import com.techreturners.moviemanager.model.PersonRole;
 
 @DataJpaTest
 public class MovieManagerServiceTest {
 
-    @Mock
-    private MovieManagerRepository mockMovieManagerRepository;
-    
-    @InjectMocks
-    private MovieManagerServiceImpl movieManagerService;
+	@Mock
+	private MovieManagerRepository mockMovieManagerRepository;
 
-    @Test
-    public void testGetAllMoviesReturnsListOfMovies() throws ParseException {
+	@InjectMocks
+	private MovieManagerServiceImpl movieManagerService;
+	
+	private final String DATE_FORMAT ="yyyy-MM-dd";
 
-        List<Movie> Movies = new ArrayList<>();
-        Movies.add(new Movie(1L, "Movie One", "This is the description for Movie One",(new SimpleDateFormat("yyyy-MM-dd").parse(LocalDate.now().toString()))));
-        Movies.add(new Movie(2L, "Movie Two", "This is the description for Movie Two",(new SimpleDateFormat("yyyy-MM-dd").parse(LocalDate.now().toString()))));
-        Movies.add(new Movie(3L, "Movie Three", "This is the description for Movie Three",(new SimpleDateFormat("yyyy-MM-dd").parse(LocalDate.now().toString()))));
+	@Test
+	public void testGetAllMoviesReturnsListOfMovies() throws ParseException {
 
-        when(mockMovieManagerRepository.findAll()).thenReturn(Movies);
+		List<Movie> movies = new ArrayList<>();
+		Person person  = new Person(1L, "Tom", PersonRole.Actor);
+		List<Person> personList = new ArrayList<Person>();
+		personList.add(person);
+		movies.add(new Movie(1L, "Movie One", "This is the description for Movie One",
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+		movies.add(new Movie(2L, "Movie Two", "This is the description for Movie Two",
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+		movies.add(new Movie(3L, "Movie Three", "This is the description for Movie Three",
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
 
-        List<Movie> actualResult;
-			actualResult = movieManagerService.getAllMovies();
+		when(mockMovieManagerRepository.findAll()).thenReturn(movies);
 
-        assertThat(actualResult).hasSize(3);
-        assertThat(actualResult).isEqualTo(Movies);
-    }
+		List<Movie> actualResult;
+		actualResult = movieManagerService.getAllMovies();
 
-    @Test
-    public void testAddAMovie() throws ParseException {
+		assertThat(actualResult).hasSize(3);
+		assertThat(actualResult).isEqualTo(movies);
+	}
 
-        var Movie = new Movie(4L, "Movie Four", "This is the description for Movie Four", (new SimpleDateFormat("yyyy-MM-dd").parse(LocalDate.now().toString())));
+	@Test
+	public void testAddAMovie() throws ParseException {
+		Person person  = new Person(1L, "Tom", PersonRole.Actor);
+		List<Person> personList = new ArrayList<Person>();
+		personList.add(person);
+		var movie = new Movie(4L, "Movie Four", "This is the description for Movie Four",
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList);
 
-        when(mockMovieManagerRepository.save(Movie)).thenReturn(Movie);
+		when(mockMovieManagerRepository.save(movie)).thenReturn(movie);
 
-        Movie actualResult = movieManagerService.insertMovie(Movie);
+		Movie actualResult = movieManagerService.insertMovie(movie);
 
-        assertThat(actualResult).isEqualTo(Movie);
-    }
+		assertThat(actualResult).isEqualTo(movie);
+	}
 
-    @Test
-    public void testGetMovieById() throws ParseException {
+	@Test
+	public void testGetMovieById() throws ParseException {
+		Person person  = new Person(1L, "Tom", PersonRole.Actor);
+		List<Person> personList = new ArrayList<Person>();
+		personList.add(person);
+		Long movieId = 5L;
+		var movie = new Movie(5L, "Movie Five", "This is the description for Movie Five",
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList);
 
-        Long MovieId = 5L;
-        var Movie = new Movie(5L, "Movie Five", "This is the description for Movie Five",(new SimpleDateFormat("yyyy-MM-dd").parse(LocalDate.now().toString())));
+		when(mockMovieManagerRepository.findById(movieId)).thenReturn(Optional.of(movie));
 
-        when(mockMovieManagerRepository.findById(MovieId)).thenReturn(Optional.of(Movie));
+		Movie actualResult = movieManagerService.getMovieById(movieId);
 
-        Movie actualResult = movieManagerService.getMovieById(MovieId);
+		assertThat(actualResult).isEqualTo(movie);
+	}
 
-        assertThat(actualResult).isEqualTo(Movie);
-    }
+	@Test
+	public void testUpdateMovieById() throws ParseException {
+		Person person  = new Person(1L, "Tom", PersonRole.Actor);
+		List<Person> personList = new ArrayList<Person>();
+		personList.add(person);
 
-    @Test
-    public void testUpdateMovieById() throws ParseException {
+		Long movieId = 5L;
+		var movie = new Movie(5L, "Movie Five", "This is the description for Movie Five",
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList);
 
-        Long MovieId = 5L;
-        var Movie = new Movie(5L, "Movie Five", "This is the description for Movie Five", (new SimpleDateFormat("yyyy-MM-dd").parse(LocalDate.now().toString())));
+		when(mockMovieManagerRepository.findById(movieId)).thenReturn(Optional.of(movie));
+		when(mockMovieManagerRepository.save(movie)).thenReturn(movie);
 
-        when(mockMovieManagerRepository.findById(MovieId)).thenReturn(Optional.of(Movie));
-        when(mockMovieManagerRepository.save(Movie)).thenReturn(Movie);
+		movieManagerService.updateMovieById(movieId, movie);
 
-        movieManagerService.updateMovieById(MovieId, Movie);
+		verify(mockMovieManagerRepository, times(1)).save(movie);
+	}
+	
+	@Test 
+	public void testGetMoviesByActor() throws ParseException {
+		List<Movie> movies = new ArrayList<>();
+		Person person  = new Person(1L, "Tom", PersonRole.Actor);
+		List<Person> personList = new ArrayList<Person>();
+		personList.add(person);
+		movies.add(new Movie(3L, "Movie Five", "This is the description for Movie Five",
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+		movies.add(new Movie(2L, "Movie Two", "This is the description for Movie Two",
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+		movies.add(new Movie(3L, "Movie Three", "This is the description for Movie Three",
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+		when(mockMovieManagerRepository.getMoviesByActor("Tom")).thenReturn(movies);
+		List<Movie> actualResult;
+		actualResult = movieManagerService.getMoviesByActor("Tom");
 
-        verify(mockMovieManagerRepository, times(1)).save(Movie);
-    }
+		assertThat(actualResult).hasSize(3);
+		assertThat(actualResult).isEqualTo(movies);
+	}
+	
+	@Test 
+	public void testGetMoviesByDirector() throws ParseException {
+		List<Movie> movies = new ArrayList<>();
+		Person person  = new Person(1L, "Tom", PersonRole.Director);
+		List<Person> personList = new ArrayList<Person>();
+		personList.add(person);
+		movies.add(new Movie(3L, "Movie Five", "This is the description for Movie Five",
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+		movies.add(new Movie(2L, "Movie Two", "This is the description for Movie Two",
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+		movies.add(new Movie(3L, "Movie Three", "This is the description for Movie Three",
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+		when(mockMovieManagerRepository.getMoviesByDirector("Tom")).thenReturn(movies);
+		List<Movie> actualResult;
+		actualResult = movieManagerService.getMoviesByDirector("Tom");
+
+		assertThat(actualResult).hasSize(3);
+		assertThat(actualResult).isEqualTo(movies);
+	}
+
 
 }

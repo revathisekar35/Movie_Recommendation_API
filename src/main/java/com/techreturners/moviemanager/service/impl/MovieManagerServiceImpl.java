@@ -38,11 +38,20 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 		retrievedMovie.setName(movie.getName());
 		retrievedMovie.setDescription(movie.getDescription());
 		retrievedMovie.setReleasYear(movie.getReleasYear());
+		retrievedMovie.setPerson(movie.getPerson());
 		movieManagerRepository.save(movie);
 	}
 
 	@Override
 	public void deleteMovieById(Long id) {
 		movieManagerRepository.deleteById(id);
+	}
+	
+	public List<Movie> getMoviesByActor(String actorName){
+		return movieManagerRepository.getMoviesByActor(actorName);		
+	}
+	
+	public List<Movie> getMoviesByDirector(String directorName){
+		return movieManagerRepository.getMoviesByDirector(directorName);		
 	}
 }

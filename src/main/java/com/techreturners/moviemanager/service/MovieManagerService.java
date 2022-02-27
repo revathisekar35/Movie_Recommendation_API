@@ -15,4 +15,8 @@ public interface MovieManagerService {
 	void updateMovieById(Long id, Movie movie);
 
 	void deleteMovieById(Long id);
+	
+	List<Movie> getMoviesByActor(String actor);
+	
+	List<Movie> getMoviesByDirector(String directorName);
 }

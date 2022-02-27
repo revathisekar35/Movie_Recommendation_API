@@ -71,7 +71,7 @@ public class MovieManagerExceptionHandler {
 		ErrorMessage message = new ErrorMessage(HttpStatus.METHOD_NOT_ALLOWED.value(), new Date(), ex.getMessage(),
 				request.getDescription(false));
 
-		return message;
+		return message; 
 	}
 
 	@ExceptionHandler(value = { NoSuchElementException.class })

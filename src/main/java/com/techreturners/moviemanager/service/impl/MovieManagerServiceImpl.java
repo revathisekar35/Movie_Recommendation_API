@@ -42,7 +42,7 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 		Movie retrievedMovie = movieManagerRepository.findById(id).get();
 		retrievedMovie.setName(movie.getName());
 		retrievedMovie.setDescription(movie.getDescription());
-		retrievedMovie.setReleasYear(movie.getReleasYear());
+		retrievedMovie.setReleaseDate(movie.getReleaseDate());
 		retrievedMovie.setPerson(movie.getPerson());
 		movieManagerRepository.save(retrievedMovie);
 	}
@@ -52,14 +52,27 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 		movieManagerRepository.deleteById(id);
 	}
 
+	@Override
 	public List<Movie> getMoviesByActor(String actorName) {
 		return movieManagerRepository.getMoviesByActor(actorName);
 	}
 
+	@Override
 	public List<Movie> getMoviesByDirector(String directorName) {
 		return movieManagerRepository.getMoviesByDirector(directorName);
 	}
 
+	@Override
+	public List<Movie> getMoviesByReleasedYear(int year) {
+		return movieManagerRepository.getMoviesByReleasedYear(year);
+	}
+	
+	@Override
+	public List<Person> getMovieCrewList() {
+		List<Person> person = new ArrayList<>();
+		personRepository.findAll().forEach(person::add);
+		return person;
+	}
 	private Movie insertpeople(Movie movie) {
 		if (movie.getId() == null) {
 			List<Person> personList = new ArrayList<Person>();
@@ -70,6 +83,5 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 			movieManagerRepository.save(movie);
 		}
 		return movie;
-
 	}
 }

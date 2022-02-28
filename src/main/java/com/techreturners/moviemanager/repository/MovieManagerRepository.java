@@ -16,4 +16,7 @@ public interface MovieManagerRepository extends CrudRepository<Movie, Long> {
 	
 	@Query("select m from Movie m join m.person p where p.name = ?1 and p.role='1'")
 	List<Movie> getMoviesByDirector(String actorName);
+	
+	@Query("from Movie  where year(releaseDate)= ?1")
+	List<Movie> getMoviesByReleasedYear(int year);
 }

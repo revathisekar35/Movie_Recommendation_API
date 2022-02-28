@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -38,11 +40,14 @@ public class Movie {
 	String description;
 
 	@Column
+	@Temporal(TemporalType.DATE)
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	Date releasYear;
+	Date releaseDate;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "MOVIE_PERSON", joinColumns = { @JoinColumn(referencedColumnName = "id") }, inverseJoinColumns = {
 			@JoinColumn(referencedColumnName = "id") })
 	List<Person> person;
+	
+	
 }

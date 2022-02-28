@@ -120,8 +120,7 @@ public class MovieManagerServiceTest {
 		movies.add(new Movie(3L, "Movie Three", "This is the description for Movie Three",
 				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
 		when(mockMovieManagerRepository.getMoviesByActor("Tom")).thenReturn(movies);
-		List<Movie> actualResult;
-		actualResult = movieManagerService.getMoviesByActor("Tom");
+		List<Movie> actualResult = movieManagerService.getMoviesByActor("Tom");
 
 		assertThat(actualResult).hasSize(3);
 		assertThat(actualResult).isEqualTo(movies);
@@ -140,12 +139,29 @@ public class MovieManagerServiceTest {
 		movies.add(new Movie(3L, "Movie Three", "This is the description for Movie Three",
 				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
 		when(mockMovieManagerRepository.getMoviesByDirector("Tom")).thenReturn(movies);
-		List<Movie> actualResult;
-		actualResult = movieManagerService.getMoviesByDirector("Tom");
+		List<Movie> actualResult = movieManagerService.getMoviesByDirector("Tom");
 
 		assertThat(actualResult).hasSize(3);
 		assertThat(actualResult).isEqualTo(movies);
 	}
 
+	@Test
+	public void testGetMoviesByReleaseYear() throws ParseException {
+		List<Movie> movies = new ArrayList<>();
+		Person person  = new Person(1L, "Tom", PersonRole.Director);
+		List<Person> personList = new ArrayList<Person>();
+		personList.add(person);
+		movies.add(new Movie(3L, "Movie Five", "This is the description for Movie Five",
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+		movies.add(new Movie(2L, "Movie Two", "This is the description for Movie Two",
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+		movies.add(new Movie(3L, "Movie Three", "This is the description for Movie Three",
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+		when(mockMovieManagerRepository.getMoviesByReleasedYear(2021)).thenReturn(movies);
+		List<Movie> actualResult = movieManagerService.getMoviesByReleasedYear(2021);
+		
+		assertThat(actualResult).hasSize(3);
+		assertThat(actualResult).isEqualTo(movies);
+	}
 
 }

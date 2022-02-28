@@ -3,6 +3,7 @@ package com.techreturners.moviemanager.service;
 import java.util.List;
 
 import com.techreturners.moviemanager.model.Movie;
+import com.techreturners.moviemanager.model.Person;
 
 public interface MovieManagerService {
 
@@ -19,4 +20,8 @@ public interface MovieManagerService {
 	List<Movie> getMoviesByActor(String actor);
 	
 	List<Movie> getMoviesByDirector(String directorName);
+	
+	List<Movie> getMoviesByReleasedYear(int year);
+	
+	List<Person> getMovieCrewList();
 }

@@ -13,13 +13,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.techreturners.moviemanager.service.MovieManagerService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techreturners.moviemanager.model.Movie;
+import com.techreturners.moviemanager.model.Person;
 
 @RestController
 @RequestMapping("/api/movie")
@@ -67,5 +64,17 @@ public class MovieManagerController {
 	public ResponseEntity<List<Movie>> getMovieByDirector(@PathVariable String directorName) {
 		List<Movie> movies = movieManagerService.getMoviesByDirector(directorName);
 		return new ResponseEntity<>(movies, HttpStatus.OK);
+	}
+
+	@GetMapping("/year/{releasedYear}")
+	public ResponseEntity<List<Movie>> getMoviesByReleaseYear(@PathVariable int releasedYear) {
+		List<Movie> movies = movieManagerService.getMoviesByReleasedYear(releasedYear);
+		return new ResponseEntity<>(movies, HttpStatus.OK);
+	}
+
+	@GetMapping("/movieCrewList")
+	public ResponseEntity<List<Person>> getMovieCrewList() {
+		List<Person> person = movieManagerService.getMovieCrewList();
+		return new ResponseEntity<>(person, HttpStatus.OK);
 	}
 }

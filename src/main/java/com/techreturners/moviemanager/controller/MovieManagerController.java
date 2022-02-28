@@ -2,7 +2,7 @@ package com.techreturners.moviemanager.controller;
 
 import java.util.List;
 
-import com.techreturners.moviemanager.model.Genre;
+import com.techreturners.moviemanager.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.techreturners.moviemanager.service.MovieManagerService;
-import com.techreturners.moviemanager.model.Movie;
-import com.techreturners.moviemanager.model.Person;
 
 @RestController
 @RequestMapping("/api/movie")
@@ -82,6 +80,24 @@ public class MovieManagerController {
 	@GetMapping("/genre/{genre}")
 	public ResponseEntity<List<Movie>> getMoviesByGenre(@PathVariable Genre genre) {
 		List<Movie> movies = movieManagerService.getMoviesByGenre(genre);
+		return new ResponseEntity<>(movies, HttpStatus.OK);
+	}
+
+	@GetMapping("/certification/{certification}")
+	public ResponseEntity<List<Movie>> getMoviesByCertification(@PathVariable Certification certification) {
+		List<Movie> movies = movieManagerService.getMoviesByCertification(certification);
+		return new ResponseEntity<>(movies, HttpStatus.OK);
+	}
+
+	@GetMapping("/language/{language}")
+	public ResponseEntity<List<Movie>> getMoviesByLanguage(@PathVariable Language language) {
+		List<Movie> movies = movieManagerService.getMoviesByLanguage(language);
+		return new ResponseEntity<>(movies, HttpStatus.OK);
+	}
+
+	@GetMapping("/country/{country}")
+	public ResponseEntity<List<Movie>> getMoviesByLanguage(@PathVariable Country country) {
+		List<Movie> movies = movieManagerService.getMoviesByCountry(country);
 		return new ResponseEntity<>(movies, HttpStatus.OK);
 	}
 }

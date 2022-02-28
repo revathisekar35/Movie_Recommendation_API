@@ -1,6 +1,6 @@
 package com.techreturners.moviemanager.model;
 
-public enum Languague {
+public enum Language {
     English,
     Chinese,
     Russian,

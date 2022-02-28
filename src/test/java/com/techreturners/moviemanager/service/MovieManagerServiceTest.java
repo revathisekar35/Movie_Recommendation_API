@@ -42,11 +42,11 @@ public class MovieManagerServiceTest {
 		personList.add(person);
 		Rating rating = new Rating();
 		movies.add(new Movie(1L, "Movie One", "This is the description for Movie One",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Languague.English, Country.UK, personList, rating));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList, rating));
 		movies.add(new Movie(2L, "Movie Two", "This is the description for Movie Two",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Languague.English, Country.UK, personList, rating));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList, rating));
 		movies.add(new Movie(3L, "Movie Three", "This is the description for Movie Three",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Languague.English, Country.UK, personList, rating));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList, rating));
 
 		when(mockMovieManagerRepository.findAll()).thenReturn(movies);
 
@@ -64,7 +64,7 @@ public class MovieManagerServiceTest {
 		personList.add(person);
 		Rating rating = new Rating();
 		var movie = new Movie(4L, "Movie Four", "This is the description for Movie Four",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Languague.English, Country.UK, personList,rating);
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList,rating);
 
 		when(mockMovieManagerRepository.save(movie)).thenReturn(movie);
 
@@ -82,7 +82,7 @@ public class MovieManagerServiceTest {
 		Rating rating = new Rating();
 
 		var movie = new Movie(5L, "Movie Five", "This is the description for Movie Five",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Languague.English, Country.UK, personList, rating);
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList, rating);
 
 		when(mockMovieManagerRepository.findById(movieId)).thenReturn(Optional.of(movie));
 
@@ -100,7 +100,7 @@ public class MovieManagerServiceTest {
 
 		Long movieId = 5L;
 		var movie = new Movie(5L, "Movie Five", "This is the description for Movie Five",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Languague.English, Country.UK, personList, rating);
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList, rating);
 
 		when(mockMovieManagerRepository.findById(movieId)).thenReturn(Optional.of(movie));
 		when(mockMovieManagerRepository.save(movie)).thenReturn(movie);
@@ -119,11 +119,11 @@ public class MovieManagerServiceTest {
 		Rating rating = new Rating();
 
 		movies.add(new Movie(3L, "Movie Five", "This is the description for Movie Five",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Languague.English, Country.UK, personList, rating));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList, rating));
 		movies.add(new Movie(2L, "Movie Two", "This is the description for Movie Two",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Languague.English, Country.UK, personList, rating));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList, rating));
 		movies.add(new Movie(3L, "Movie Three", "This is the description for Movie Three",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Languague.English, Country.UK, personList, rating));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList, rating));
 		when(mockMovieManagerRepository.getMoviesByActor("Tom")).thenReturn(movies);
 		List<Movie> actualResult = movieManagerService.getMoviesByActor("Tom");
 
@@ -140,11 +140,11 @@ public class MovieManagerServiceTest {
 		Rating rating = new Rating();
 
 		movies.add(new Movie(3L, "Movie Five", "This is the description for Movie Five",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Languague.English, Country.UK, personList, rating));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList, rating));
 		movies.add(new Movie(2L, "Movie Two", "This is the description for Movie Two",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Languague.English, Country.UK, personList, rating));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList, rating));
 		movies.add(new Movie(3L, "Movie Three", "This is the description for Movie Three",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Languague.English, Country.UK, personList, rating));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList, rating));
 		when(mockMovieManagerRepository.getMoviesByDirector("Tom")).thenReturn(movies);
 		List<Movie> actualResult = movieManagerService.getMoviesByDirector("Tom");
 
@@ -161,11 +161,11 @@ public class MovieManagerServiceTest {
 		Rating rating = new Rating();
 
 		movies.add(new Movie(3L, "Movie Five", "This is the description for Movie Five",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Languague.English, Country.UK, personList, rating));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList, rating));
 		movies.add(new Movie(2L, "Movie Two", "This is the description for Movie Two",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Languague.English, Country.UK, personList, rating));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList, rating));
 		movies.add(new Movie(3L, "Movie Three", "This is the description for Movie Three",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Languague.English, Country.UK, personList, rating));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList, rating));
 		when(mockMovieManagerRepository.getMoviesByReleasedYear(2021)).thenReturn(movies);
 		List<Movie> actualResult = movieManagerService.getMoviesByReleasedYear(2021);
 		

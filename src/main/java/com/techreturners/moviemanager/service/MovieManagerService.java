@@ -2,9 +2,7 @@ package com.techreturners.moviemanager.service;
 
 import java.util.List;
 
-import com.techreturners.moviemanager.model.Genre;
-import com.techreturners.moviemanager.model.Movie;
-import com.techreturners.moviemanager.model.Person;
+import com.techreturners.moviemanager.model.*;
 
 public interface MovieManagerService {
 
@@ -27,4 +25,10 @@ public interface MovieManagerService {
 	List<Person> getMovieCrewList();
 
 	List<Movie> getMoviesByGenre(Genre genre);
+
+	List<Movie> getMoviesByCertification(Certification certification);
+
+	List<Movie> getMoviesByLanguage(Language language);
+
+	List<Movie> getMoviesByCountry(Country country);
 }

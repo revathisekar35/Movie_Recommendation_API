@@ -2,12 +2,10 @@ package com.techreturners.moviemanager.repository;
 
 import java.util.List;
 
-import com.techreturners.moviemanager.model.Genre;
+import com.techreturners.moviemanager.model.*;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
-import com.techreturners.moviemanager.model.Movie;
 
 @Repository
 public interface MovieManagerRepository extends CrudRepository<Movie, Long> {
@@ -23,4 +21,13 @@ public interface MovieManagerRepository extends CrudRepository<Movie, Long> {
 
 	@Query("select m from Movie m where genre = ?1 ")
 	List<Movie> getMoviesByGenre(Genre genre);
+
+	@Query("select m from Movie m where certification = ?1 ")
+	List<Movie> getMoviesByCertification(Certification certification);
+
+	@Query("select m from Movie m where language = ?1 ")
+	List<Movie> getMoviesByLanguage(Language language);
+
+	@Query("select m from Movie m where country = ?1 ")
+	List<Movie> getMoviesByCountry(Country country);
 }

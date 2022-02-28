@@ -3,12 +3,10 @@ package com.techreturners.moviemanager.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.techreturners.moviemanager.model.Genre;
+import com.techreturners.moviemanager.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.techreturners.moviemanager.model.Movie;
-import com.techreturners.moviemanager.model.Person;
 import com.techreturners.moviemanager.repository.MovieManagerRepository;
 import com.techreturners.moviemanager.repository.PersonRepository;
 import com.techreturners.moviemanager.service.MovieManagerService;
@@ -78,6 +76,21 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 	@Override
 	public List<Movie> getMoviesByGenre(Genre genre) {
 		return movieManagerRepository.getMoviesByGenre(genre);
+	}
+
+	@Override
+	public List<Movie> getMoviesByCertification(Certification certification) {
+		return movieManagerRepository.getMoviesByCertification(certification);
+	}
+
+	@Override
+	public List<Movie> getMoviesByLanguage(Language language) {
+		return movieManagerRepository.getMoviesByLanguage(language);
+	}
+
+	@Override
+	public List<Movie> getMoviesByCountry(Country country) {
+		return movieManagerRepository.getMoviesByCountry(country);
 	}
 
 

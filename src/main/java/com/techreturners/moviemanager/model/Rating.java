@@ -1,5 +1,6 @@
 package com.techreturners.moviemanager.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,13 +15,18 @@ import javax.persistence.*;
 @Builder
 public class Rating {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(updatable = false, nullable = false,name="ID")
     Long Id;
 
     @Column
     Long userId;
+    /*@JsonBackReference
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    User User;*/
 
+    @JsonBackReference
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "movie_id",referencedColumnName = "id")
     Movie movie;

@@ -41,7 +41,7 @@ public class Movie {
 	Certification certification;
 
 	@Column
-	Language languague;
+	Language language;
 
 	@Column
 	Country country;

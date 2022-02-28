@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.techreturners.moviemanager.service.MovieManagerService;
 import com.techreturners.moviemanager.model.Movie;
+import com.techreturners.moviemanager.model.Person;
 
 @RestController
 @RequestMapping("/api/movie")
@@ -51,5 +52,29 @@ public class MovieManagerController {
 	public ResponseEntity<Movie> deleteMovieById(@PathVariable Long movieId) {
 		movieManagerService.deleteMovieById(movieId);
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@GetMapping({ "/actorName/{actorName}" })
+	public ResponseEntity<List<Movie>> getMovieByActor(@PathVariable String actorName) {
+		List<Movie> movies = movieManagerService.getMoviesByActor(actorName);
+		return new ResponseEntity<>(movies, HttpStatus.OK);
+	}
+
+	@GetMapping({ "/directorName/{directorName}" })
+	public ResponseEntity<List<Movie>> getMovieByDirector(@PathVariable String directorName) {
+		List<Movie> movies = movieManagerService.getMoviesByDirector(directorName);
+		return new ResponseEntity<>(movies, HttpStatus.OK);
+	}
+
+	@GetMapping("/year/{releasedYear}")
+	public ResponseEntity<List<Movie>> getMoviesByReleaseYear(@PathVariable int releasedYear) {
+		List<Movie> movies = movieManagerService.getMoviesByReleasedYear(releasedYear);
+		return new ResponseEntity<>(movies, HttpStatus.OK);
+	}
+
+	@GetMapping("/movieCrewList")
+	public ResponseEntity<List<Person>> getMovieCrewList() {
+		List<Person> person = movieManagerService.getMovieCrewList();
+		return new ResponseEntity<>(person, HttpStatus.OK);
 	}
 }

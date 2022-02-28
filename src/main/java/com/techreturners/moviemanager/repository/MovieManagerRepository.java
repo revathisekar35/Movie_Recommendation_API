@@ -2,6 +2,7 @@ package com.techreturners.moviemanager.repository;
 
 import java.util.List;
 
+import com.techreturners.moviemanager.model.Genre;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -19,4 +20,7 @@ public interface MovieManagerRepository extends CrudRepository<Movie, Long> {
 	
 	@Query("from Movie  where year(releaseDate)= ?1")
 	List<Movie> getMoviesByReleasedYear(int year);
+
+	@Query("select m from Movie m where genre = ?1 ")
+	List<Movie> getMoviesByGenre(Genre genre);
 }

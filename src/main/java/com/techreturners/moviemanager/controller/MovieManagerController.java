@@ -2,6 +2,7 @@ package com.techreturners.moviemanager.controller;
 
 import java.util.List;
 
+import com.techreturners.moviemanager.model.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -76,5 +77,11 @@ public class MovieManagerController {
 	public ResponseEntity<List<Person>> getMovieCrewList() {
 		List<Person> person = movieManagerService.getMovieCrewList();
 		return new ResponseEntity<>(person, HttpStatus.OK);
+	}
+
+	@GetMapping("/genre/{genre}")
+	public ResponseEntity<List<Movie>> getMoviesByGenre(@PathVariable Genre genre) {
+		List<Movie> movies = movieManagerService.getMoviesByGenre(genre);
+		return new ResponseEntity<>(movies, HttpStatus.OK);
 	}
 }

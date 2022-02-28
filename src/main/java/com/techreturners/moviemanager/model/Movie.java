@@ -3,17 +3,7 @@ package com.techreturners.moviemanager.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -44,10 +34,27 @@ public class Movie {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	Date releaseDate;
 
+	@Column
+	Genre genre;
+
+	@Column
+	Certification certification;
+
+	@Column
+	Languague languague;
+
+	@Column
+	Country country;
+
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "MOVIE_PERSON", joinColumns = { @JoinColumn(referencedColumnName = "id") }, inverseJoinColumns = {
 			@JoinColumn(referencedColumnName = "id") })
 	List<Person> person;
+
+	@OneToOne
+	@JoinColumn(name = "rating_id")
+	Rating rating;
+
 	
 	
 }

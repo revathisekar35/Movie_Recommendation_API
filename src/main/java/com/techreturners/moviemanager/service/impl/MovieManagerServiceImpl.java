@@ -3,6 +3,7 @@ package com.techreturners.moviemanager.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.techreturners.moviemanager.model.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -73,6 +74,13 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 		personRepository.findAll().forEach(person::add);
 		return person;
 	}
+
+	@Override
+	public List<Movie> getMoviesByGenre(Genre genre) {
+		return movieManagerRepository.getMoviesByGenre(genre);
+	}
+
+
 	private Movie insertpeople(Movie movie) {
 		if (movie.getId() == null) {
 			List<Person> personList = new ArrayList<Person>();

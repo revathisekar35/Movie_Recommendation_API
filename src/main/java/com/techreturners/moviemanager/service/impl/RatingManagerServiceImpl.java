@@ -35,8 +35,6 @@ public class RatingManagerServiceImpl implements RatingManagerService {
     @Override
     public void updateRatingById(Long id, Rating rating) {
         Rating retrievedRating = ratingManagerRepository.findById(id).get();
-        retrievedRating.setUserId(rating.getUserId());
-        //retrievedRating.setMovieId(rating.getMovieId());
         retrievedRating.setLikes(rating.getLikes());
         retrievedRating.setDislikes(rating.getDislikes());
         retrievedRating.setTotalRating(rating.getTotalRating());

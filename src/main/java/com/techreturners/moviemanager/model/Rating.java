@@ -19,12 +19,10 @@ public class Rating {
     @Column(updatable = false, nullable = false,name="ID")
     Long Id;
 
-    @Column
-    Long userId;
-    /*@JsonBackReference
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id",referencedColumnName = "id")
-    User User;*/
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    User user;
 
     @JsonBackReference
     @OneToOne(cascade = CascadeType.ALL)

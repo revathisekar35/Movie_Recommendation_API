@@ -40,4 +40,8 @@ public class User {
     @JsonManagedReference
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
     List<Review> reviews = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
+    List<Rating> ratings = new ArrayList<>();
 }

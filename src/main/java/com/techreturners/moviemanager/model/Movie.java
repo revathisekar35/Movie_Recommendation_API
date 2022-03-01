@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
@@ -51,8 +52,9 @@ public class Movie {
 			@JoinColumn(referencedColumnName = "id") })
 	List<Person> person;
 
+	@JsonBackReference
 	@OneToOne
-	@JoinColumn(name = "rating_id")
+	@JoinColumn(name = "rating_id",referencedColumnName = "id")
 	Rating rating;
 
 	

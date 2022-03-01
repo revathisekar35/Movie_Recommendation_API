@@ -74,14 +74,12 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 		return person;
 	}
 	private Movie insertpeople(Movie movie) {
-		if (movie.getId() == null) {
 			List<Person> personList = new ArrayList<Person>();
 			for (Person person : movie.getPerson()) {
 				personList.add(personRepository.save(person));
 			}
 			movie.setPerson(personList);
 			movieManagerRepository.save(movie);
-		}
 		return movie;
 	}
 }

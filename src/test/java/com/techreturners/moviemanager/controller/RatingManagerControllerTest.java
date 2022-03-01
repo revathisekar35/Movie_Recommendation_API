@@ -44,7 +44,7 @@ public class RatingManagerControllerTest {
         mockMvcController = MockMvcBuilders.standaloneSetup(RatingManagerController).build();
         mapper = new ObjectMapper();
     }
-/*
+
     @Test
     public void testGetAllRatingsReturnsRatings() throws Exception {
         Movie m1 = new Movie();
@@ -52,9 +52,10 @@ public class RatingManagerControllerTest {
         User u1 = new User();
         User u2 = new User();
         List<Rating> ratings = new ArrayList<>();
-        ratings.add(new Rating(1L, u1, m1, 1L, 1L, 1.0));
-        ratings.add(new Rating(2L, u2, m2, 2L, 2L, 2.0));
-
+        /*ratings.add(new Rating(1L, u1, m1, 1L, 1L, 1.0));
+        ratings.add(new Rating(2L, u2, m2, 2L, 2L, 2.0));*/
+        ratings.add(new Rating(1L, 1L, m1, 1L, 1L, 1.0));
+        ratings.add(new Rating(2L, 2L, m2, 2L, 2L, 2.0));
 
         when(mockRatingManagerServiceImpl.getAllRatings()).thenReturn(ratings);
 
@@ -74,8 +75,8 @@ public class RatingManagerControllerTest {
     public void testGetMappingGetRatingById() throws Exception {
         Movie m3 = new Movie();
         User u3 = new User();
-        Rating rating = new Rating(3L, u3, m3, 3L, 3L, 3.0);
-
+//        Rating rating = new Rating(3L, u3, m3, 3L, 3L, 3.0);
+        Rating rating = new Rating(3L, 3L, m3, 3L, 3L, 3.0);
         when(mockRatingManagerServiceImpl.getRatingById(rating.getId())).thenReturn(rating);
 
         this.mockMvcController.perform(
@@ -91,7 +92,8 @@ public class RatingManagerControllerTest {
     public void testPostMappingAddARating() throws Exception {
         Movie m3 = new Movie();
         User u3 = new User();
-        Rating rating = new Rating(3L, u3, m3, 3L, 3L, 3.0);
+        //Rating rating = new Rating(3L, u3, m3, 3L, 3L, 3.0);
+        Rating rating = new Rating(3L, 3L, m3, 3L, 3L, 3.0);
 
         when(mockRatingManagerServiceImpl.insertRating(rating)).thenReturn(rating);
 
@@ -107,7 +109,8 @@ public class RatingManagerControllerTest {
     public void testPutMappingUpdateARating() throws Exception {
         Movie m3 = new Movie();
         User u3 = new User();
-        Rating rating = new Rating(3L, u3, m3, 3L, 3L, 3.0);
+        //Rating rating = new Rating(3L, u3, m3, 3L, 3L, 3.0);
+        Rating rating = new Rating(3L, 3L, m3, 3L, 3L, 3.0);
 
         this.mockMvcController
                 .perform(MockMvcRequestBuilders.put("/api/rating/update/" + rating.getId())
@@ -121,11 +124,12 @@ public class RatingManagerControllerTest {
     public void testDeleteMappingForDeleteAMovie() throws Exception {
         Movie m3 = new Movie();
         User u3 = new User();
-        Rating rating = new Rating(3L, u3, m3, 3L, 3L, 3.0);
+        //Rating rating = new Rating(3L, u3, m3, 3L, 3L, 3.0);
+        Rating rating = new Rating(3L, 3L, m3, 3L, 3L, 3.0);
 
         when(mockRatingManagerServiceImpl.insertRating(rating)).thenReturn(rating);
         this.mockMvcController.perform(MockMvcRequestBuilders.delete("/api/rating/delete/" + rating.getId()))
                 .andExpect(MockMvcResultMatchers.status().isOk());
         verify(mockRatingManagerServiceImpl, times(1)).deleteRatingById(rating.getId());
-    }*/
+    }
 }

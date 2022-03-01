@@ -25,7 +25,7 @@ public class RatingManagerServiceTest {
 
     @InjectMocks
     private RatingManagerServiceImpl ratingManagerService;
-/*
+
     @Test
     public void testGetAllRatingsReturnsListOfRatings()  {
         Movie m1 = new Movie();
@@ -35,9 +35,12 @@ public class RatingManagerServiceTest {
         User u2 = new User();
         User u3 = new User();
         List<Rating> ratings = new ArrayList<>();
-        ratings.add(new Rating(1L, u1, m1,1L,1L,1.0));
+        /*ratings.add(new Rating(1L, u1, m1,1L,1L,1.0));
         ratings.add(new Rating(2L, u2, m2,2L,2L,2.0));
-        ratings.add(new Rating(3L, u3, m3,3L,3L,3.0));
+        ratings.add(new Rating(3L, u3, m3,3L,3L,3.0));*/
+        ratings.add(new Rating(1L, 1L, m1,1L,1L,1.0));
+        ratings.add(new Rating(2L, 2L, m2,2L,2L,2.0));
+        ratings.add(new Rating(3L, 3L, m3,3L,3L,3.0));
 
         when(mockRatingManagerRepository.findAll()).thenReturn(ratings);
 
@@ -52,7 +55,8 @@ public class RatingManagerServiceTest {
     public void testAddARating() {
         Movie m1 = new Movie();
         User u1 = new User();
-        var rating = new Rating(4L, u1, m1,4L,4L,4.0);
+        //var rating = new Rating(4L, u1, m1,4L,4L,4.0);
+        var rating = new Rating(4L, 4L, m1,4L,4L,4.0);
 
         when(mockRatingManagerRepository.save(rating)).thenReturn(rating);
 
@@ -66,7 +70,8 @@ public class RatingManagerServiceTest {
         Movie m1 = new Movie();
         User u1 = new User();
         Long ratingId = 5L;
-        var Rating = new Rating(5L, u1, m1,5L,5L,5.0);
+        //var Rating = new Rating(5L, u1, m1,5L,5L,5.0);
+        var Rating = new Rating(5L, 5L, m1,5L,5L,5.0);
 
         when(mockRatingManagerRepository.findById(ratingId)).thenReturn(Optional.of(Rating));
 
@@ -80,7 +85,8 @@ public class RatingManagerServiceTest {
         Movie m1 = new Movie();
         User u1 = new User();
         Long ratingId = 5L;
-        var rating = new Rating(5L, u1, m1,5L,5L,5.0);
+        //var rating = new Rating(5L, u1, m1,5L,5L,5.0);
+        var rating = new Rating(5L, 5L, m1,5L,5L,5.0);
 
         when(mockRatingManagerRepository.findById(ratingId)).thenReturn(Optional.of(rating));
         when(mockRatingManagerRepository.save(rating)).thenReturn(rating);
@@ -95,12 +101,13 @@ public class RatingManagerServiceTest {
         Movie m1 = new Movie();
         User u1 = new User();
         Long ratingId = 5L;
-        var rating = new Rating(5L, u1, m1,5L,5L,5.0);
+        //var rating = new Rating(5L, u1, m1,5L,5L,5.0);
+        var rating = new Rating(5L, 5L, m1,5L,5L,5.0);
 
         when(mockRatingManagerRepository.save(rating)).thenReturn(rating);
 
         //delete
         ratingManagerService.deleteRatingById(ratingId);
         verify(mockRatingManagerRepository, times(1)).deleteById(rating.getId());
-    }*/
+    }
 }

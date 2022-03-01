@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.techreturners.moviemanager.service.MovieManagerService;
 
 @RestController
-@RequestMapping("/api/movie")
+@RequestMapping("/api/v1/movie")
 public class MovieManagerController {
 
 	@Autowired

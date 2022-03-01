@@ -19,7 +19,7 @@ import com.techreturners.moviemanager.model.Movie;
 import com.techreturners.moviemanager.model.Person;
 
 @RestController
-@RequestMapping("/api/movie")
+@RequestMapping("/api/v1/movie")
 public class MovieManagerController {
 
 	@Autowired

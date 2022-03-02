@@ -27,9 +27,9 @@ public class Rating {
     @Column
     Long user;
 
-    @JsonManagedReference
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "movie_id",referencedColumnName = "id")
+    //@JsonManagedReference
+    @OneToOne(mappedBy = "rating")
+    //@JoinColumn(name = "movie_id",referencedColumnName = "id")
     Movie movie;
 
     @Column

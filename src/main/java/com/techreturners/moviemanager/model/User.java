@@ -1,6 +1,5 @@
 package com.techreturners.moviemanager.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,12 +31,4 @@ public class User {
 
     @Column
     boolean isAdmin;
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    List<Movie> movies = new ArrayList<>();
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
-    List<Review> reviews = new ArrayList<>();
 }

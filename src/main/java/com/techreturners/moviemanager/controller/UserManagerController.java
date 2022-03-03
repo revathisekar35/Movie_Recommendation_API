@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v1/user")
+@RequestMapping("/api/v1/user")
 public class UserManagerController {
 
     @Autowired
@@ -51,6 +51,5 @@ public class UserManagerController {
         userManagerService.deleteUserById(userId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
 }

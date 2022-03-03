@@ -1,9 +1,7 @@
 package com.techreturners.moviemanager.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.techreturners.moviemanager.model.Movie;
 import com.techreturners.moviemanager.model.Review;
-import com.techreturners.moviemanager.model.User;
 import com.techreturners.moviemanager.service.impl.ReviewManagerServiceImpl;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -50,18 +48,14 @@ public class ReviewManagerControllerTest {
 
         Date myDate = new Date("10/02/2021");
         Date myDate1 = new Date("06/05/2022");
-        Movie m = new Movie();
-        User u = new User();
-        Movie m1 = new Movie();
-        User u1 = new User();
         List<Review> reviews = new ArrayList<>();
-        reviews.add(new Review(1L, "This is the comment for Movie 1", myDate, m, u));
-        reviews.add(new Review(2L, "This is the comment for Movie 2", myDate1, m1, u1));
+        reviews.add(new Review(1L, "This is the comment for Movie 1", myDate, 1L, 1L));
+        reviews.add(new Review(2L, "This is the comment for Movie 2", myDate1, 1L, 1L));
 
         when(mockReviewManagerServiceImpl.getAllReviews()).thenReturn(reviews);
 
         this.mockMvcController.perform(
-                        MockMvcRequestBuilders.get("/api/review/"))
+                        MockMvcRequestBuilders.get("/api/v1/review/getAllReviews"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(1L))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].comment").value("This is the comment for Movie 1"))
@@ -72,14 +66,12 @@ public class ReviewManagerControllerTest {
     @Test
     public void testGetMappingGetReviewById() throws Exception {
         Date myDate = new Date("10/02/2021");
-        Movie m = new Movie();
-        User u = new User();
-        Review review = new Review(4L, "This is the comment for Movie 4", myDate, m, u);
+        Review review = new Review(4L, "This is the comment for Movie 4", myDate, 1L, 1L);
 
         when(mockReviewManagerServiceImpl.getReviewById(review.getId())).thenReturn(review);
 
         this.mockMvcController.perform(
-                        MockMvcRequestBuilders.get("/api/review/" + review.getId()))
+                        MockMvcRequestBuilders.get("/api/v1/review/" + review.getId()))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(4))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.comment").value("This is the comment for Movie 4"));
@@ -88,15 +80,13 @@ public class ReviewManagerControllerTest {
     @Test
     public void testPostMappingAddAReview() throws Exception {
 
-        Date myDate = new Date("10/02/2021");
-        Movie m = new Movie();
-        User u = new User();
-        Review review = new Review(4L, "This is the comment for Movie 4", myDate, m, u);
+        Date myDate = new Date("10/12/2021");
+        Review review = new Review(4L, "This is the comment for Movie 4", myDate, 1L, 1L);
 
         when(mockReviewManagerServiceImpl.insertReview(review)).thenReturn(review);
 
         this.mockMvcController.perform(
-                        MockMvcRequestBuilders.post("/api/review/")
+                        MockMvcRequestBuilders.post("/api/v1/review")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(mapper.writeValueAsString(review)))
                 .andExpect(MockMvcResultMatchers.status().isCreated());
@@ -108,12 +98,10 @@ public class ReviewManagerControllerTest {
     public void testPutMappingUpdateAReview() throws Exception {
 
         Date myDate = new Date("10/02/2021");
-        Movie m = new Movie();
-        User u = new User();
-        Review review = new Review(4L, "This is the updated comment for Movie 4", myDate, m, u);
+        Review review = new Review(4L, "This is the updated comment for Movie 4", myDate, 1L, 1L);
 
         this.mockMvcController.perform(
-                        MockMvcRequestBuilders.put("/api/review/" + review.getId())
+                        MockMvcRequestBuilders.put("/api/v1/review/" + review.getId())
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(mapper.writeValueAsString(review)))
                 .andExpect(MockMvcResultMatchers.status().isOk());
@@ -123,14 +111,11 @@ public class ReviewManagerControllerTest {
 
     @Test
     public void testDeleteMappingDeleteAReview() throws Exception {
-
         Date myDate = new Date("10/02/2021");
-        Movie m = new Movie();
-        User u = new User();
-        Review review = new Review(4L, "This is the updated comment for Movie 4", myDate, m, u);
+        Review review = new Review(4L, "This is the updated comment for Movie 4", myDate, 1L, 1L);
 
         this.mockMvcController.perform(
-                        MockMvcRequestBuilders.delete("/api/review/" + review.getId())
+                        MockMvcRequestBuilders.delete("/api/v1/review/" + review.getId())
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(mapper.writeValueAsString(review)))
                 .andExpect(MockMvcResultMatchers.status().isOk());

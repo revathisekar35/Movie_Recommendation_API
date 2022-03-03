@@ -33,9 +33,9 @@ public class User {
     @Column
     boolean isAdmin;
 
-    /*@JsonManagedReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    List<Movie> movies = new ArrayList<>();*/
+    List<Movie> movies = new ArrayList<>();
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)

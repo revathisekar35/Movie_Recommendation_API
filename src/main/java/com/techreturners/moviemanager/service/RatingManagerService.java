@@ -10,7 +10,7 @@ public interface RatingManagerService {
 
     Rating getRatingById(Long Id);
 
-    Rating insertRating(Rating rating);
+    Rating insertRating(Rating rating) throws Exception;
 
     void updateRatingById(Long ratingId, Rating rating);
 

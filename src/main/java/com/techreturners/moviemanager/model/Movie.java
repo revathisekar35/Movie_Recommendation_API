@@ -52,11 +52,4 @@ public class Movie {
 			@JoinColumn(referencedColumnName = "id") })
 	List<Person> person;
 
-	//@JsonBackReference
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "rating_id")
-	Rating rating;
-
-	
-	
 }

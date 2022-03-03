@@ -28,7 +28,7 @@ public class RatingManagerController {
 	}
 
 	@PostMapping("/create")
-	public ResponseEntity<Rating> addRating(@RequestBody Rating rating) {
+	public ResponseEntity<Rating> addRating(@RequestBody Rating rating) throws Exception {
 		Rating newRating = ratingManagerService.insertRating(rating);
 		return new ResponseEntity<>(newRating, HttpStatus.CREATED);
 	}

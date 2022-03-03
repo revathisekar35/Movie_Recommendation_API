@@ -29,7 +29,7 @@ This is the Movie recommendation API application which will give you information
 
 
 ### Description
- This movie Recommendation API project is a Spring Boot application. We can Add/Update/Delete movies. Also we can get details about a movie based on our API input and data availability.
+ This movie Recommendation API project is a Spring Boot application. We can Add/Update/Delete movies. Also we can get details about a movie based on our API input and data availability. Implemented spring boot global exception handler. Applied Spring Boot "Actuator" module to monitor and manage application usage. Designed Swagger documentation
  
 ### The Recommended input to get a result is:
 - Id

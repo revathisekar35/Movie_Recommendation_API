@@ -104,13 +104,4 @@ public class MovieManagerExceptionHandler {
 
 		return message;
 	}
-	
-	@ExceptionHandler(value = { NullPointerException.class })
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	public ErrorMessage NullPointerException(NullPointerException ex, WebRequest request) {
-		ErrorMessage message = new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), new Date(), ex.getMessage(),
-				request.getDescription(false));
-
-		return message;
-	}
 }

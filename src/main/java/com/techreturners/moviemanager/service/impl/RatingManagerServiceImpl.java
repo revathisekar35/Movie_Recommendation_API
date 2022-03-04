@@ -1,7 +1,9 @@
 package com.techreturners.moviemanager.service.impl;
 
+import com.techreturners.moviemanager.exception.MovieNotFoundException;
 import com.techreturners.moviemanager.model.Rating;
 import com.techreturners.moviemanager.repository.RatingManagerRepository;
+import com.techreturners.moviemanager.service.MovieManagerService;
 import com.techreturners.moviemanager.service.RatingManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,9 @@ public class RatingManagerServiceImpl implements RatingManagerService {
 
     @Autowired
     RatingManagerRepository ratingManagerRepository;
+    
+    @Autowired
+    MovieManagerService movieManagerService;
 
     @Override
     public List<Rating> getAllRatings() {
@@ -28,15 +33,18 @@ public class RatingManagerServiceImpl implements RatingManagerService {
     }
 
     @Override
-    public Rating insertRating(Rating rating) {
+    public Rating insertRating(Rating rating) throws MovieNotFoundException {
+    	if(rating.getMovie() != null && rating.getMovie().getId() !=null) {
+    		rating.setMovie(movieManagerService.getMovieById(rating.getMovie().getId()));
+    	}else {
+    		throw new MovieNotFoundException("Movie or Movie Id should not be null in input");
+    	}
         return ratingManagerRepository.save(rating);
     }
 
     @Override
     public void updateRatingById(Long id, Rating rating) {
         Rating retrievedRating = ratingManagerRepository.findById(id).get();
-        retrievedRating.setUserId(rating.getUserId());
-        retrievedRating.setMovieId(rating.getMovieId());
         retrievedRating.setLikes(rating.getLikes());
         retrievedRating.setDislikes(rating.getDislikes());
         retrievedRating.setTotalRating(rating.getTotalRating());

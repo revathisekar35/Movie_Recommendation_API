@@ -3,11 +3,10 @@ package com.techreturners.moviemanager.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.techreturners.moviemanager.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.techreturners.moviemanager.model.Movie;
-import com.techreturners.moviemanager.model.Person;
 import com.techreturners.moviemanager.repository.MovieManagerRepository;
 import com.techreturners.moviemanager.repository.PersonRepository;
 import com.techreturners.moviemanager.service.MovieManagerService;
@@ -72,6 +71,30 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 		List<Person> person = new ArrayList<>();
 		personRepository.findAll().forEach(person::add);
 		return person;
+	}
+
+	@Override
+	public List<Movie> getMoviesByGenre(String genre) {
+		Genre.valueOf(Genre.class, genre).ordinal();
+		return movieManagerRepository.getMoviesByGenre(genre);
+	}
+
+	@Override
+	public List<Movie> getMoviesByCertification(String certification) {
+		Certification.valueOf(Certification.class, certification).ordinal();
+		return movieManagerRepository.getMoviesByCertification(certification);
+	}
+
+	@Override
+	public List<Movie> getMoviesByLanguage(String language) {
+		Language.valueOf(Language.class, language).ordinal();
+		return movieManagerRepository.getMoviesByLanguage(language);
+	}
+
+	@Override
+	public List<Movie> getMoviesByCountry(String country) {
+		Country.valueOf(Country.class, country).ordinal();
+		return movieManagerRepository.getMoviesByCountry(country);
 	}
 	private Movie insertpeople(Movie movie) {
 		if (movie.getId() == null) {

@@ -19,4 +19,16 @@ public interface MovieManagerRepository extends CrudRepository<Movie, Long> {
 	
 	@Query("from Movie  where year(releaseDate)= ?1")
 	List<Movie> getMoviesByReleasedYear(int year);
+
+	@Query("select m from Movie m where genre = ?1 ")
+	List<Movie> getMoviesByGenre(String genre);
+
+	@Query("select m from Movie m where certification = ?1 ")
+	List<Movie> getMoviesByCertification(String certification);
+
+	@Query("select m from Movie m where language = ?1 ")
+	List<Movie> getMoviesByLanguage(String language);
+
+	@Query("select m from Movie m where country = ?1 ")
+	List<Movie> getMoviesByCountry(String country);
 }

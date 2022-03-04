@@ -1,5 +1,6 @@
 package com.techreturners.moviemanager.service;
 
+import com.techreturners.moviemanager.exception.MovieNotFoundException;
 import com.techreturners.moviemanager.model.Rating;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface RatingManagerService {
 
     Rating getRatingById(Long Id);
 
-    Rating insertRating(Rating rating);
+    Rating insertRating(Rating rating) throws MovieNotFoundException;
 
     void updateRatingById(Long ratingId, Rating rating);
 

@@ -77,4 +77,27 @@ public class MovieManagerController {
 		List<Person> person = movieManagerService.getMovieCrewList();
 		return new ResponseEntity<>(person, HttpStatus.OK);
 	}
+@GetMapping("/genre/{genre}")
+	public ResponseEntity<List<Movie>> getMoviesByGenre(@PathVariable String genre) {
+		List<Movie> movies = movieManagerService.getMoviesByGenre(genre);
+		return new ResponseEntity<>(movies, HttpStatus.OK);
+	}
+
+	@GetMapping("/certification/{certification}")
+	public ResponseEntity<List<Movie>> getMoviesByCertification(@PathVariable String certification) {
+		List<Movie> movies = movieManagerService.getMoviesByCertification(certification);
+		return new ResponseEntity<>(movies, HttpStatus.OK);
+	}
+
+	@GetMapping("/language/{language}")
+	public ResponseEntity<List<Movie>> getMoviesByLanguage(@PathVariable String language) {
+		List<Movie> movies = movieManagerService.getMoviesByLanguage(language);
+		return new ResponseEntity<>(movies, HttpStatus.OK);
+	}
+
+	@GetMapping("/country/{country}")
+	public ResponseEntity<List<Movie>> getMoviesByCountry(@PathVariable String country) {
+		List<Movie> movies = movieManagerService.getMoviesByCountry(country);
+		return new ResponseEntity<>(movies, HttpStatus.OK);
+	}
 }

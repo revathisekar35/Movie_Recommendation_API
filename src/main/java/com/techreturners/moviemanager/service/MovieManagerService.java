@@ -24,4 +24,12 @@ public interface MovieManagerService {
 	List<Movie> getMoviesByReleasedYear(int year);
 	
 	List<Person> getMovieCrewList();
+
+	List<Movie> getMoviesByGenre(String genre);
+
+	List<Movie> getMoviesByCertification(String certification);
+
+	List<Movie> getMoviesByLanguage(String language);
+
+	List<Movie> getMoviesByCountry(String country);
 }

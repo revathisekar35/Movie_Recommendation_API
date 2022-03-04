@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -17,15 +14,13 @@ import javax.persistence.Id;
 @Builder
 public class Rating {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(updatable = false, nullable = false,name="ID")
     Long Id;
 
-    @Column
-    Long userId;
-
-    @Column
-    Long movieId;
+  	@OneToOne(cascade = CascadeType.ALL)
+  	@JoinColumn(name = "movie_id")
+  	Movie movie;
 
     @Column
     Long likes;

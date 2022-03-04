@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.techreturners.moviemanager.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -24,9 +25,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techreturners.moviemanager.service.impl.MovieManagerServiceImpl;
-import com.techreturners.moviemanager.model.Movie;
-import com.techreturners.moviemanager.model.Person;
-import com.techreturners.moviemanager.model.PersonRole;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -57,15 +55,15 @@ public class MovieManagerControllerTest {
 		personList.add(person);
 		List<Movie> Movies = new ArrayList<>();
 		Movies.add(new Movie(1L, "Movie One", "This is the description for Movie One",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList));
 		Movies.add(new Movie(2L, "Movie Two", "This is the description for Movie Two",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList));
 		Movies.add(new Movie(3L, "Movie Three", "This is the description for Movie Three",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList));
 
 		when(mockMovieManagerServiceImpl.getAllMovies()).thenReturn(Movies);
 
-		this.mockMvcController.perform(MockMvcRequestBuilders.get("/api/movie/getAllMovies"))
+		this.mockMvcController.perform(MockMvcRequestBuilders.get("/api/v1/movie/getAllMovies"))
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(1))
 				.andExpect(MockMvcResultMatchers.jsonPath("$[0].name").value("Movie One"))
@@ -81,11 +79,11 @@ public class MovieManagerControllerTest {
 		List<Person> personList = new ArrayList<Person>();
 		personList.add(person);
 		Movie movie = new Movie(4L, "Movie Four", "This is the description for Movie Four",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList);
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList);
 
 		when(mockMovieManagerServiceImpl.getMovieById(movie.getId())).thenReturn(movie);
 
-		this.mockMvcController.perform(MockMvcRequestBuilders.get("/api/movie/" + movie.getId()))
+		this.mockMvcController.perform(MockMvcRequestBuilders.get("/api/v1/movie/" + movie.getId()))
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(4))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Movie Four"));
@@ -97,12 +95,12 @@ public class MovieManagerControllerTest {
 		List<Person> personList = new ArrayList<Person>();
 		personList.add(person);
 		Movie movie = new Movie(4L, "Movie Four", "This is the description for Movie Four",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList);
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList);
 
 		when(mockMovieManagerServiceImpl.insertMovie(movie)).thenReturn(movie);
 
 		this.mockMvcController
-				.perform(MockMvcRequestBuilders.post("/api/movie/create/").contentType(MediaType.APPLICATION_JSON)
+				.perform(MockMvcRequestBuilders.post("/api/v1/movie/create/").contentType(MediaType.APPLICATION_JSON)
 						.content(mapper.writeValueAsString(movie)))
 				.andExpect(MockMvcResultMatchers.status().isCreated());
 
@@ -115,10 +113,10 @@ public class MovieManagerControllerTest {
 		List<Person> personList = new ArrayList<Person>();
 		personList.add(person);
 		Movie movie = new Movie(4L, "Boss Baby", "This is the description for the Boss Baby",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList);
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList);
 
 		this.mockMvcController
-				.perform(MockMvcRequestBuilders.put("/api/movie/update/" + movie.getId())
+				.perform(MockMvcRequestBuilders.put("/api/v1/movie/update/" + movie.getId())
 						.contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(movie)))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 
@@ -131,9 +129,9 @@ public class MovieManagerControllerTest {
 		List<Person> personList = new ArrayList<Person>();
 		personList.add(person);
 		Movie movie = new Movie(4L, "Boss Baby", "This is the description for the Boss Baby",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList);
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList);
 		when(mockMovieManagerServiceImpl.insertMovie(movie)).thenReturn(movie);
-		this.mockMvcController.perform(MockMvcRequestBuilders.delete("/api/movie/delete/" + movie.getId()))
+		this.mockMvcController.perform(MockMvcRequestBuilders.delete("/api/v1/movie/delete/" + movie.getId()))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 		verify(mockMovieManagerServiceImpl, times(1)).deleteMovieById(movie.getId());
 	}
@@ -145,15 +143,15 @@ public class MovieManagerControllerTest {
 		personList.add(person);
 		List<Movie> Movies = new ArrayList<>();
 		Movies.add(new Movie(1L, "Movie One", "This is the description for Movie One",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList));
 		Movies.add(new Movie(2L, "Movie Two", "This is the description for Movie Two",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList));
 		Movies.add(new Movie(3L, "Movie Three", "This is the description for Movie Three",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList));
 
 		when(mockMovieManagerServiceImpl.getMoviesByDirector("Tom")).thenReturn(Movies);
 
-		this.mockMvcController.perform(MockMvcRequestBuilders.get("/api/movie/directorName/Tom"))
+		this.mockMvcController.perform(MockMvcRequestBuilders.get("/api/v1/movie/directorName/Tom"))
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(1))
 				.andExpect(MockMvcResultMatchers.jsonPath("$[0].name").value("Movie One"))
@@ -179,15 +177,15 @@ public class MovieManagerControllerTest {
 		personList.add(person);
 		List<Movie> Movies = new ArrayList<>();
 		Movies.add(new Movie(1L, "Movie One", "This is the description for Movie One",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList));
 		Movies.add(new Movie(2L, "Movie Two", "This is the description for Movie Two",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList));
 		Movies.add(new Movie(3L, "Movie Three", "This is the description for Movie Three",
-				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), personList));
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList));
 
 		when(mockMovieManagerServiceImpl.getMoviesByActor("Tom")).thenReturn(Movies);
 
-		this.mockMvcController.perform(MockMvcRequestBuilders.get("/api/movie/actorName/Tom"))
+		this.mockMvcController.perform(MockMvcRequestBuilders.get("/api/v1/movie/actorName/Tom"))
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(1))
 				.andExpect(MockMvcResultMatchers.jsonPath("$[0].name").value("Movie One"))

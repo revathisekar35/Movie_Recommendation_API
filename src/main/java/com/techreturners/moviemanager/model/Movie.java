@@ -44,10 +44,20 @@ public class Movie {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	Date releaseDate;
 
+	@Column
+	Genre genre;
+
+	@Column
+	Certification certification;
+
+	@Column
+	Language language;
+
+	@Column
+	Country country;
+
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "MOVIE_PERSON", joinColumns = { @JoinColumn(referencedColumnName = "id") }, inverseJoinColumns = {
 			@JoinColumn(referencedColumnName = "id") })
-	List<Person> person;
-	
-	
+	List<Person> person;	
 }

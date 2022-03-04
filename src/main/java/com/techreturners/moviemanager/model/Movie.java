@@ -52,8 +52,4 @@ public class Movie {
 			@JoinColumn(referencedColumnName = "id") })
 	List<Person> person;
 
-	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	User user;
 }

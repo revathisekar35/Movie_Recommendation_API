@@ -62,7 +62,7 @@ public class RatingManagerServiceTest {
         personList.add(person);
         String DATE_FORMAT = "yyyy-MM-dd";
         var m1 = new Movie(4L, "Movie Four", "This is the description for Movie Four",
-                (new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList);
+               (new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList);
 
         //User u1 = new User();
         //var rating = new Rating(4L, u1, m1,4L,4L,4.0);

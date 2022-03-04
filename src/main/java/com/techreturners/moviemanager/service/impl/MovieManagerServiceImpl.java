@@ -7,6 +7,10 @@ import com.techreturners.moviemanager.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.techreturners.moviemanager.config.AppConfig;
+import com.techreturners.moviemanager.config.TwilioInitilizer;
+import com.techreturners.moviemanager.model.Movie;
+import com.techreturners.moviemanager.model.Person;
 import com.techreturners.moviemanager.repository.MovieManagerRepository;
 import com.techreturners.moviemanager.repository.PersonRepository;
 import com.techreturners.moviemanager.service.MovieManagerService;
@@ -19,7 +23,10 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 
 	@Autowired
 	PersonRepository personRepository;
-
+	
+	@Autowired
+	AppConfig appconfig;
+	
 	public List<Movie> getAllMovies() {
 		List<Movie> movies = new ArrayList<>();
 		movieManagerRepository.findAll().forEach(movies::add);
@@ -97,14 +104,12 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 		return movieManagerRepository.getMoviesByCountry(country);
 	}
 	private Movie insertpeople(Movie movie) {
-		if (movie.getId() == null) {
 			List<Person> personList = new ArrayList<Person>();
 			for (Person person : movie.getPerson()) {
 				personList.add(personRepository.save(person));
 			}
 			movie.setPerson(personList);
 			movieManagerRepository.save(movie);
-		}
 		return movie;
 	}
 }

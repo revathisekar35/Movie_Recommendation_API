@@ -25,17 +25,11 @@ public class Review {
     String comment;
 
     @Column
-    @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "yyyy-MM-dd")
     Date createdDate;
 
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "movie_id")
-    Movie movie;
+    @Column(name = "movie_id")
+    Long movieId;
 
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    User user;
+    @Column(name = "user_id")
+    Long userId;
 }

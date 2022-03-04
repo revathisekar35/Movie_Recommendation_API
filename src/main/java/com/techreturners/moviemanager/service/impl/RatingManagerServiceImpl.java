@@ -1,9 +1,7 @@
 package com.techreturners.moviemanager.service.impl;
 
 import com.techreturners.moviemanager.model.Rating;
-import com.techreturners.moviemanager.repository.MovieManagerRepository;
 import com.techreturners.moviemanager.repository.RatingManagerRepository;
-import com.techreturners.moviemanager.service.MovieManagerService;
 import com.techreturners.moviemanager.service.RatingManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +14,6 @@ public class RatingManagerServiceImpl implements RatingManagerService {
 
     @Autowired
     RatingManagerRepository ratingManagerRepository;
-    
-    @Autowired
-    MovieManagerService movieManagerService;
 
     @Override
     public List<Rating> getAllRatings() {
@@ -33,13 +28,7 @@ public class RatingManagerServiceImpl implements RatingManagerService {
     }
 
     @Override
-    public Rating insertRating(Rating rating) throws Exception {
-    	System.out.println(rating.getMovie());
-    	if(rating.getMovie() != null && rating.getMovie().getId() != null) {
-    		rating.setMovie(movieManagerService.getMovieById(rating.getMovie().getId()));
-    	}else {
-    		throw new Exception("Movie Id should not be null");
-    	}
+    public Rating insertRating(Rating rating) {
         return ratingManagerRepository.save(rating);
     }
 

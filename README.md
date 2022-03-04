@@ -27,6 +27,9 @@ This is the Movie recommendation API application which will give you information
 ### Main Entry Point
 - The Main Entry Point for the application is: [MovieApplication.java](src/main/java/com/techreturners/moviemanager/MovieApplication.java)
 
+###UML Diagram: 
+![](movie-api-uml.png)
+
 
 ### Description
  This movie Recommendation API project is a Spring Boot application. We can Add/Update/Delete movies. Also we can get details about a movie based on our API input and data availability. Implemented spring boot global exception handler. Applied Spring Boot "Actuator" module to monitor and manage application usage. Designed Swagger documentation

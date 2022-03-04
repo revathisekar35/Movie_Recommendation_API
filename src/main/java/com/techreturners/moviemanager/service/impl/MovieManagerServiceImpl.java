@@ -74,22 +74,26 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 	}
 
 	@Override
-	public List<Movie> getMoviesByGenre(Genre genre) {
+	public List<Movie> getMoviesByGenre(String genre) {
+		Genre.valueOf(Genre.class, genre).ordinal();
 		return movieManagerRepository.getMoviesByGenre(genre);
 	}
 
 	@Override
-	public List<Movie> getMoviesByCertification(Certification certification) {
+	public List<Movie> getMoviesByCertification(String certification) {
+		Certification.valueOf(Certification.class, certification).ordinal();
 		return movieManagerRepository.getMoviesByCertification(certification);
 	}
 
 	@Override
-	public List<Movie> getMoviesByLanguage(Language language) {
+	public List<Movie> getMoviesByLanguage(String language) {
+		Language.valueOf(Language.class, language).ordinal();
 		return movieManagerRepository.getMoviesByLanguage(language);
 	}
 
 	@Override
-	public List<Movie> getMoviesByCountry(Country country) {
+	public List<Movie> getMoviesByCountry(String country) {
+		Country.valueOf(Country.class, country).ordinal();
 		return movieManagerRepository.getMoviesByCountry(country);
 	}
 

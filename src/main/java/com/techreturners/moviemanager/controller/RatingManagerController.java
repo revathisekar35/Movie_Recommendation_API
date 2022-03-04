@@ -1,5 +1,6 @@
 package com.techreturners.moviemanager.controller;
 
+import com.techreturners.moviemanager.exception.MovieNotFoungException;
 import com.techreturners.moviemanager.model.Rating;
 import com.techreturners.moviemanager.service.RatingManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class RatingManagerController {
 	}
 
 	@PostMapping("/create")
-	public ResponseEntity<Rating> addRating(@RequestBody Rating rating) {
+	public ResponseEntity<Rating> addRating(@RequestBody Rating rating) throws MovieNotFoungException {
 		Rating newRating = ratingManagerService.insertRating(rating);
 		return new ResponseEntity<>(newRating, HttpStatus.CREATED);
 	}

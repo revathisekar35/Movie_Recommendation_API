@@ -31,6 +31,15 @@ public class MovieManagerExceptionHandler {
 		return message;
 	}
 
+	@ExceptionHandler(value = { MovieNotFoungException.class })
+	@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+	public ErrorMessage MovieNotFoungException(MovieNotFoungException ex, WebRequest request) {
+		ErrorMessage message = new ErrorMessage(HttpStatus.NOT_ACCEPTABLE.value(), new Date(), ex.getMessage(),
+				request.getDescription(false));
+
+		return message;
+	}
+
 	@ExceptionHandler(value = { SQLIntegrityConstraintViolationException.class })
 	@ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
 	public ErrorMessage SQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException ex,

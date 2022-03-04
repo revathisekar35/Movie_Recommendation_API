@@ -1,7 +1,5 @@
 package com.techreturners.moviemanager.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,17 +18,9 @@ public class Rating {
     @Column(updatable = false, nullable = false,name="ID")
     Long Id;
 
-    /*@JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    User user;*/
-    @Column
-    Long user;
-
-    //@JsonManagedReference
-    @OneToOne(mappedBy = "rating")
-    //@JoinColumn(name = "movie_id",referencedColumnName = "id")
-    Movie movie;
+  	@OneToOne(cascade = CascadeType.ALL)
+  	@JoinColumn(name = "movie_id")
+  	Movie movie;
 
     @Column
     Long likes;

@@ -24,11 +24,11 @@ public interface MovieManagerService {
 	
 	List<Person> getMovieCrewList();
 
-	List<Movie> getMoviesByGenre(Genre genre);
+	List<Movie> getMoviesByGenre(String genre);
 
-	List<Movie> getMoviesByCertification(Certification certification);
+	List<Movie> getMoviesByCertification(String certification);
 
-	List<Movie> getMoviesByLanguage(Language language);
+	List<Movie> getMoviesByLanguage(String language);
 
-	List<Movie> getMoviesByCountry(Country country);
+	List<Movie> getMoviesByCountry(String country);
 }

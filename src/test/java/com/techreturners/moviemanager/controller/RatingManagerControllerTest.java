@@ -16,12 +16,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hibernate.type.descriptor.java.JdbcDateTypeDescriptor.DATE_FORMAT;
 import static org.mockito.Mockito.*;
 
 @AutoConfigureMockMvc
@@ -49,11 +46,7 @@ public class RatingManagerControllerTest {
     public void testGetAllRatingsReturnsRatings() throws Exception {
         Movie m1 = new Movie();
         Movie m2 = new Movie();
-//        User u1 = new User();
-//        User u2 = new User();
         List<Rating> ratings = new ArrayList<>();
-        /*ratings.add(new Rating(1L, u1, m1, 1L, 1L, 1.0));
-        ratings.add(new Rating(2L, u2, m2, 2L, 2L, 2.0));*/
         ratings.add(new Rating(1L, m1, 1L, 1L, 1.0));
         ratings.add(new Rating(2L, m2, 2L, 2L, 2.0));
 
@@ -74,8 +67,6 @@ public class RatingManagerControllerTest {
     @Test
     public void testGetMappingGetRatingById() throws Exception {
         Movie m3 = new Movie();
-        //User u3 = new User();
-//        Rating rating = new Rating(3L, u3, m3, 3L, 3L, 3.0);
         Rating rating = new Rating(3L, m3, 3L, 3L, 3.0);
         when(mockRatingManagerServiceImpl.getRatingById(rating.getId())).thenReturn(rating);
 
@@ -91,8 +82,6 @@ public class RatingManagerControllerTest {
     @Test
     public void testPostMappingAddARating() throws Exception {
         Movie m3 = new Movie();
-        //User u3 = new User();
-        //Rating rating = new Rating(3L, u3, m3, 3L, 3L, 3.0);
         Rating rating = new Rating(3L, m3, 3L, 3L, 3.0);
 
         when(mockRatingManagerServiceImpl.insertRating(rating)).thenReturn(rating);
@@ -108,8 +97,6 @@ public class RatingManagerControllerTest {
     @Test
     public void testPutMappingUpdateARating() throws Exception {
         Movie m3 = new Movie();
-        //User u3 = new User();
-        //Rating rating = new Rating(3L, u3, m3, 3L, 3L, 3.0);
         Rating rating = new Rating(3L, m3, 3L, 3L, 3.0);
 
         this.mockMvcController
@@ -123,8 +110,6 @@ public class RatingManagerControllerTest {
     @Test
     public void testDeleteMappingForDeleteAMovie() throws Exception {
         Movie m3 = new Movie();
-        //User u3 = new User();
-        //Rating rating = new Rating(3L, u3, m3, 3L, 3L, 3.0);
         Rating rating = new Rating(3L, m3, 3L, 3L, 3.0);
 
         when(mockRatingManagerServiceImpl.insertRating(rating)).thenReturn(rating);

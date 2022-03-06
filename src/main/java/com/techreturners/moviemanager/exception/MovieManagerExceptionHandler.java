@@ -104,4 +104,13 @@ public class MovieManagerExceptionHandler {
 
 		return message;
 	}
+	
+	@ExceptionHandler(value = { IllegalArgumentException.class })
+	@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+	public ErrorMessage IllegalArgumentException(IllegalArgumentException ex, WebRequest request) {
+		ErrorMessage message = new ErrorMessage(HttpStatus.NOT_ACCEPTABLE.value(), new Date(), ex.getMessage(),
+				request.getDescription(false));
+
+		return message;
+	}
 }

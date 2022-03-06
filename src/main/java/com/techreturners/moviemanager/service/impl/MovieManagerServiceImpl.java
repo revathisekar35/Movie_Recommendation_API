@@ -44,18 +44,24 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 	}
 
 	@Override
-	public void updateMovieById(Long id, Movie movie) {
+	public Movie updateMovieById(Long id, Movie movie) {
 		Movie retrievedMovie = movieManagerRepository.findById(id).get();
 		retrievedMovie.setName(movie.getName());
 		retrievedMovie.setDescription(movie.getDescription());
 		retrievedMovie.setReleaseDate(movie.getReleaseDate());
 		retrievedMovie.setPerson(movie.getPerson());
-		movieManagerRepository.save(retrievedMovie);
+		retrievedMovie.setCountry(movie.getCountry());
+		retrievedMovie.setGenre(movie.getGenre());
+		retrievedMovie.setCertification(movie.getCertification());
+		retrievedMovie.setLanguage(movie.getLanguage());
+		return movieManagerRepository.save(retrievedMovie);
 	}
 
 	@Override
 	public void deleteMovieById(Long id) {
-		movieManagerRepository.deleteById(id);
+			Movie movie = movieManagerRepository.findById(id).get();
+			movie.getPerson().removeAll(movie.getPerson());
+			movieManagerRepository.delete(movie);
 	}
 
 	@Override

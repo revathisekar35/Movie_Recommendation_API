@@ -13,7 +13,7 @@ public interface MovieManagerService {
 
 	Movie getMovieById(Long id);
 
-	void updateMovieById(Long id, Movie movie);
+	Movie updateMovieById(Long id, Movie movie);
 
 	void deleteMovieById(Long id);
 	

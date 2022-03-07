@@ -1,7 +1,10 @@
 package com.techreturners.moviemanager.service.impl;
 
 import com.techreturners.moviemanager.exception.MovieNotFoundException;
+import com.techreturners.moviemanager.model.Movie;
+import com.techreturners.moviemanager.model.Person;
 import com.techreturners.moviemanager.model.Rating;
+import com.techreturners.moviemanager.repository.MovieManagerRepository;
 import com.techreturners.moviemanager.repository.RatingManagerRepository;
 import com.techreturners.moviemanager.service.MovieManagerService;
 import com.techreturners.moviemanager.service.RatingManagerService;
@@ -18,7 +21,7 @@ public class RatingManagerServiceImpl implements RatingManagerService {
     RatingManagerRepository ratingManagerRepository;
     
     @Autowired
-    MovieManagerService movieManagerService;
+    MovieManagerRepository movieManagerRepository;
 
     @Override
     public List<Rating> getAllRatings() {
@@ -34,12 +37,11 @@ public class RatingManagerServiceImpl implements RatingManagerService {
 
     @Override
     public Rating insertRating(Rating rating) throws MovieNotFoundException {
-    	if(rating.getMovie() != null && rating.getMovie().getId() !=null) {
-    		rating.setMovie(movieManagerService.getMovieById(rating.getMovie().getId()));
-    	}else {
-    		throw new MovieNotFoundException("Movie or Movie Id should not be null in input");
-    	}
-        return ratingManagerRepository.save(rating);
+
+        Movie movie =  rating.getMovie();
+        rating.setMovie(movie);
+        ratingManagerRepository.save(rating);
+        return rating;
     }
 
     @Override

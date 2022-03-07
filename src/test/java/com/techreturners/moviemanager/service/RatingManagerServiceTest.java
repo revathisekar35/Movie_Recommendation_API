@@ -2,6 +2,8 @@ package com.techreturners.moviemanager.service;
 
 import com.techreturners.moviemanager.exception.MovieNotFoundException;
 import com.techreturners.moviemanager.model.*;
+import com.techreturners.moviemanager.repository.MovieManagerRepository;
+import com.techreturners.moviemanager.repository.PersonRepository;
 import com.techreturners.moviemanager.repository.RatingManagerRepository;
 import com.techreturners.moviemanager.service.impl.RatingManagerServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -24,6 +26,12 @@ public class RatingManagerServiceTest {
 
     @Mock
     private RatingManagerRepository mockRatingManagerRepository;
+
+    @Mock
+    private MovieManagerRepository movieRepository;
+
+    @Mock
+    private PersonRepository personRepository;
 
     @InjectMocks
     private RatingManagerServiceImpl ratingManagerService;
@@ -54,10 +62,9 @@ public class RatingManagerServiceTest {
         List<Person> personList = new ArrayList<>();
         personList.add(person);
         String DATE_FORMAT = "yyyy-MM-dd";
-        var m1 = new Movie(4L, "Movie Four", "This is the description for Movie Four",
-               (new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList);
-
-        var rating = new Rating(4L, m1,4L,4L,4.0);
+        Movie movie  = new Movie(4L, "Movie Four", "This is the description for Movie Four",
+              (new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList);
+        var rating = new Rating(4L, movie,4L,4L,4.0);
 
         when(mockRatingManagerRepository.save(rating)).thenReturn(rating);
 

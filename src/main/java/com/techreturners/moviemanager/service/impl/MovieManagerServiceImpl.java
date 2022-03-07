@@ -35,7 +35,7 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 
 	@Override
 	public Movie insertMovie(Movie movie) {
-		return insertpeople(movie);
+		return insertPersonAndMovie(movie);
 	}
 
 	@Override
@@ -44,18 +44,24 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 	}
 
 	@Override
-	public void updateMovieById(Long id, Movie movie) {
+	public Movie updateMovieById(Long id, Movie movie) {
 		Movie retrievedMovie = movieManagerRepository.findById(id).get();
 		retrievedMovie.setName(movie.getName());
 		retrievedMovie.setDescription(movie.getDescription());
 		retrievedMovie.setReleaseDate(movie.getReleaseDate());
 		retrievedMovie.setPerson(movie.getPerson());
-		movieManagerRepository.save(retrievedMovie);
+		retrievedMovie.setCountry(movie.getCountry());
+		retrievedMovie.setGenre(movie.getGenre());
+		retrievedMovie.setCertification(movie.getCertification());
+		retrievedMovie.setLanguage(movie.getLanguage());
+		return movieManagerRepository.save(retrievedMovie);
 	}
 
 	@Override
 	public void deleteMovieById(Long id) {
-		movieManagerRepository.deleteById(id);
+			Movie movie = movieManagerRepository.findById(id).get();
+			movie.getPerson().removeAll(movie.getPerson());
+			movieManagerRepository.delete(movie);
 	}
 
 	@Override
@@ -82,28 +88,28 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 
 	@Override
 	public List<Movie> getMoviesByGenre(String genre) {
-		Genre.valueOf(Genre.class, genre).ordinal();
-		return movieManagerRepository.getMoviesByGenre(genre);
+		int genreVal = Genre.valueOf(Genre.class, genre).ordinal();
+		return movieManagerRepository.getMoviesByGenre(genreVal);
 	}
 
 	@Override
 	public List<Movie> getMoviesByCertification(String certification) {
-		Certification.valueOf(Certification.class, certification).ordinal();
-		return movieManagerRepository.getMoviesByCertification(certification);
+		int certificationVal = Certification.valueOf(Certification.class, certification).ordinal();
+		return movieManagerRepository.getMoviesByCertification(certificationVal);
 	}
 
 	@Override
 	public List<Movie> getMoviesByLanguage(String language) {
-		Language.valueOf(Language.class, language).ordinal();
-		return movieManagerRepository.getMoviesByLanguage(language);
+		int languageVal = Language.valueOf(Language.class, language).ordinal();
+		return movieManagerRepository.getMoviesByLanguage(languageVal);
 	}
 
 	@Override
 	public List<Movie> getMoviesByCountry(String country) {
-		Country.valueOf(Country.class, country).ordinal();
-		return movieManagerRepository.getMoviesByCountry(country);
+		int countryVal = Country.valueOf(Country.class, country).ordinal();
+		return movieManagerRepository.getMoviesByCountry(countryVal);
 	}
-	private Movie insertpeople(Movie movie) {
+	private Movie insertPersonAndMovie(Movie movie) {
 			List<Person> personList = new ArrayList<Person>();
 			for (Person person : movie.getPerson()) {
 				personList.add(personRepository.save(person));

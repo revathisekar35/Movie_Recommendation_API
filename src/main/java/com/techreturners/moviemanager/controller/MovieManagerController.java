@@ -44,14 +44,14 @@ public class MovieManagerController {
 
 	@PutMapping({ "/update/{movieId}" })
 	public ResponseEntity<Movie> updateMovieById(@PathVariable("movieId") Long movieId, @RequestBody Movie movie) {
-		movieManagerService.updateMovieById(movieId, movie);
-		return new ResponseEntity<>(movieManagerService.getMovieById(movieId), HttpStatus.OK);
+		Movie updatedMovie = movieManagerService.updateMovieById(movieId, movie);
+		return new ResponseEntity<>(updatedMovie, HttpStatus.OK);
 	}
 
 	@DeleteMapping({ "/delete/{movieId}" })
-	public ResponseEntity<Movie> deleteMovieById(@PathVariable Long movieId) {
+	public ResponseEntity deleteMovieById(@PathVariable Long movieId) {
 		movieManagerService.deleteMovieById(movieId);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>("Movie deleted successfully",HttpStatus.OK);
 	}
 
 	@GetMapping({ "/actorName/{actorName}" })
@@ -77,7 +77,7 @@ public class MovieManagerController {
 		List<Person> person = movieManagerService.getMovieCrewList();
 		return new ResponseEntity<>(person, HttpStatus.OK);
 	}
-@GetMapping("/genre/{genre}")
+	@GetMapping("/genre/{genre}")
 	public ResponseEntity<List<Movie>> getMoviesByGenre(@PathVariable String genre) {
 		List<Movie> movies = movieManagerService.getMoviesByGenre(genre);
 		return new ResponseEntity<>(movies, HttpStatus.OK);

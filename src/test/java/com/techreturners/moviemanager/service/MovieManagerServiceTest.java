@@ -20,6 +20,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.techreturners.moviemanager.repository.MovieManagerRepository;
+import com.techreturners.moviemanager.repository.PersonRepository;
 import com.techreturners.moviemanager.service.impl.MovieManagerServiceImpl;
 
 @DataJpaTest
@@ -27,6 +28,9 @@ public class MovieManagerServiceTest {
 
 	@Mock
 	private MovieManagerRepository mockMovieManagerRepository;
+	
+	@Mock
+	private PersonRepository personRepository;
 
 	@InjectMocks
 	private MovieManagerServiceImpl movieManagerService;

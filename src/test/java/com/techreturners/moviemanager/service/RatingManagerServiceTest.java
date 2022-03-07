@@ -27,12 +27,6 @@ public class RatingManagerServiceTest {
     @Mock
     private RatingManagerRepository mockRatingManagerRepository;
 
-    @Mock
-    private MovieManagerRepository movieRepository;
-
-    @Mock
-    private PersonRepository personRepository;
-
     @InjectMocks
     private RatingManagerServiceImpl ratingManagerService;
 

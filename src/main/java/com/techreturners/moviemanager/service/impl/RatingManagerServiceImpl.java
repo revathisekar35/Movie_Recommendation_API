@@ -2,11 +2,8 @@ package com.techreturners.moviemanager.service.impl;
 
 import com.techreturners.moviemanager.exception.MovieNotFoundException;
 import com.techreturners.moviemanager.model.Movie;
-import com.techreturners.moviemanager.model.Person;
 import com.techreturners.moviemanager.model.Rating;
-import com.techreturners.moviemanager.repository.MovieManagerRepository;
 import com.techreturners.moviemanager.repository.RatingManagerRepository;
-import com.techreturners.moviemanager.service.MovieManagerService;
 import com.techreturners.moviemanager.service.RatingManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +16,6 @@ public class RatingManagerServiceImpl implements RatingManagerService {
 
     @Autowired
     RatingManagerRepository ratingManagerRepository;
-    
-    @Autowired
-    MovieManagerRepository movieManagerRepository;
 
     @Override
     public List<Rating> getAllRatings() {
@@ -36,8 +30,7 @@ public class RatingManagerServiceImpl implements RatingManagerService {
     }
 
     @Override
-    public Rating insertRating(Rating rating) throws MovieNotFoundException {
-
+    public Rating insertRating(Rating rating) throws MovieNotFoundException{
         Movie movie =  rating.getMovie();
         rating.setMovie(movie);
         ratingManagerRepository.save(rating);

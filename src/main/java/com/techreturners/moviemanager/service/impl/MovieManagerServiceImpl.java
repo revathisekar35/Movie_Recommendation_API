@@ -35,7 +35,7 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 
 	@Override
 	public Movie insertMovie(Movie movie) {
-		return insertpeople(movie);
+		return insertPersonAndMovie(movie);
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 		int countryVal = Country.valueOf(Country.class, country).ordinal();
 		return movieManagerRepository.getMoviesByCountry(countryVal);
 	}
-	private Movie insertpeople(Movie movie) {
+	private Movie insertPersonAndMovie(Movie movie) {
 			List<Person> personList = new ArrayList<Person>();
 			for (Person person : movie.getPerson()) {
 				personList.add(personRepository.save(person));

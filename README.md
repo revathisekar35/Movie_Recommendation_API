@@ -51,7 +51,7 @@ This is the Movie recommendation API application which will give you the informa
 `mvn test`
 
 Future Thoughts:
-- Can restrict to get movie based on age.
-- Can give permission to perform API based on the user role.
+- Additional filter criteria based on userage
+- We can adhere Spring Security concept to design role based API
 
 

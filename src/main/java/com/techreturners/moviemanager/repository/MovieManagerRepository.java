@@ -31,4 +31,9 @@ public interface MovieManagerRepository extends CrudRepository<Movie, Long> {
 
 	@Query("select m from Movie m where country = '?1'")
 	List<Movie> getMoviesByCountry(int country);
+	
+	@Query("select r.movie from Rating r where r.totalRating= ?1")
+	List<Movie> getMoviesByRating(double rating);
+	
+	
 }

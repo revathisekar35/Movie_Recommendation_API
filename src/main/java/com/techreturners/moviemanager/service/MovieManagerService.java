@@ -32,4 +32,6 @@ public interface MovieManagerService {
 	List<Movie> getMoviesByLanguage(String language);
 
 	List<Movie> getMoviesByCountry(String country);
+	
+	List<Movie> getMoviesByRating(Double rating);
 }

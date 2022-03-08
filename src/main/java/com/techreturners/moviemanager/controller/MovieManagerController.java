@@ -100,4 +100,10 @@ public class MovieManagerController {
 		List<Movie> movies = movieManagerService.getMoviesByCountry(country);
 		return new ResponseEntity<>(movies, HttpStatus.OK);
 	}
+	
+	@GetMapping("/rating/{rating}")
+	public ResponseEntity<List<Movie>> getMoviesByRating(@PathVariable Double rating) {
+		List<Movie> movies = movieManagerService.getMoviesByRating(rating);
+		return new ResponseEntity<>(movies, HttpStatus.OK);
+	}
 }

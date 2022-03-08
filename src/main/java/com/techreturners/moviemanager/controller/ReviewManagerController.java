@@ -27,19 +27,19 @@ public class ReviewManagerController {
         return new ResponseEntity<>(reviewManagerService.getReviewById(reviewId), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Review> addReview(@RequestBody Review review) {
         Review newReview = reviewManagerService.insertReview(review);
         return new ResponseEntity<>(newReview, HttpStatus.CREATED);
     }
 
-    @PutMapping({"/{reviewId}"})
+    @PutMapping({"/update/{reviewId}"})
     public ResponseEntity<Review> updateReviewById(@PathVariable("reviewId") Long reviewId, @RequestBody Review review) {
         reviewManagerService.updateReviewById(reviewId, review);
         return new ResponseEntity<>(reviewManagerService.getReviewById(reviewId), HttpStatus.OK);
     }
 
-    @DeleteMapping({"/{reviewId}"})
+    @DeleteMapping({"/delete/{reviewId}"})
     public ResponseEntity<Review> deleteReviewById(@PathVariable Long reviewId) {
         reviewManagerService.deleteReviewById(reviewId);
         return new ResponseEntity<>(HttpStatus.OK);

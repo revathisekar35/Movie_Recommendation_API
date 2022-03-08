@@ -1,9 +1,7 @@
 package com.techreturners.moviemanager.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.techreturners.moviemanager.model.Review;
 import com.techreturners.moviemanager.model.User;
-import com.techreturners.moviemanager.repository.UserManagerRepository;
 import com.techreturners.moviemanager.service.impl.UserManagerServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,11 +17,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -33,8 +29,6 @@ public class UserManagerControllerTest {
 
     @InjectMocks
     private UserManagerController userManagerController;
-    private UserManagerRepository userManagerRepository;
-
 
     @Autowired
     private MockMvc mockMvcController;
@@ -91,7 +85,7 @@ public class UserManagerControllerTest {
         when(mockUserManagerServiceImpl.insertUser(user)).thenReturn(user);
 
         this.mockMvcController.perform(
-                        MockMvcRequestBuilders.post("/api/v1/user")
+                        MockMvcRequestBuilders.post("/api/v1/user/create")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(mapper.writeValueAsString(user)))
                 .andExpect(MockMvcResultMatchers.status().isCreated());
@@ -105,7 +99,7 @@ public class UserManagerControllerTest {
         when(mockUserManagerServiceImpl.insertUser(user)).thenReturn(user);
 
         this.mockMvcController.perform(
-                        MockMvcRequestBuilders.post("/api/v1/user")
+                        MockMvcRequestBuilders.post("/api/v1/user/create")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(mapper.writeValueAsString(user)))
                 .andExpect(MockMvcResultMatchers.status().isCreated());
@@ -117,7 +111,7 @@ public class UserManagerControllerTest {
     public void testPutMappingUpdateUser() throws Exception {
         User user = new User(2L, "guest", "guest@gmail.com", 20, false);
         this.mockMvcController.perform(
-                        MockMvcRequestBuilders.put("/api/v1/user/" + user.getId())
+                        MockMvcRequestBuilders.put("/api/v1/user/update/" + user.getId())
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(mapper.writeValueAsString(user)))
                 .andExpect(MockMvcResultMatchers.status().isOk());
@@ -129,7 +123,7 @@ public class UserManagerControllerTest {
     public void testDeleteMappingDeleteUser() throws Exception {
         User user = new User(2L, "guest", "guest@gmail.com", 20, false);
         this.mockMvcController.perform(
-                        MockMvcRequestBuilders.delete("/api/v1/user/" + user.getId())
+                        MockMvcRequestBuilders.delete("/api/v1/user/delete/" + user.getId())
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(mapper.writeValueAsString(user)))
                 .andExpect(MockMvcResultMatchers.status().isOk());

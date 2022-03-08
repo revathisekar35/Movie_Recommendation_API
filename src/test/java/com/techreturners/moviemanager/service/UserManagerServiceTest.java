@@ -1,6 +1,5 @@
 package com.techreturners.moviemanager.service;
 
-import com.techreturners.moviemanager.model.Review;
 import com.techreturners.moviemanager.model.User;
 import com.techreturners.moviemanager.repository.UserManagerRepository;
 import com.techreturners.moviemanager.service.impl.UserManagerServiceImpl;
@@ -11,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,7 +82,7 @@ public class UserManagerServiceTest {
         Long userId = 3L;
         var user = new User(3L, "user", "user@gmail.com", 10, false);
 
-        when(mockUserManagerRepository.findById(userId)).thenReturn(Optional.of(user));
+       // when(mockUserManagerRepository.findById(userId)).thenReturn(Optional.of(user));
         userManagerServiceImpl.deleteUserById(userId);
 
         verify(mockUserManagerRepository).deleteById(userId);

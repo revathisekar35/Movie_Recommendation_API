@@ -34,19 +34,19 @@ public class UserManagerController {
         return new ResponseEntity<>(userManagerService.getUserById(userId), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<User> addUser(@RequestBody User user) {
         User newUser = userManagerService.insertUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
-    @PutMapping({"/{userId}"})
+    @PutMapping({"/update/{userId}"})
     public ResponseEntity<User> updateUserById(@PathVariable("userId") Long userId, @RequestBody User user) {
         userManagerService.updateUserById(userId, user);
         return new ResponseEntity<>(userManagerService.getUserById(userId), HttpStatus.OK);
     }
 
-    @DeleteMapping({"/{userId}"})
+    @DeleteMapping({"/delete/{userId}"})
     public ResponseEntity<User> deleteUserById(@PathVariable Long userId) {
         userManagerService.deleteUserById(userId);
         return new ResponseEntity<>(HttpStatus.OK);

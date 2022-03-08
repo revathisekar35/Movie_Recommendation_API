@@ -17,8 +17,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -37,6 +38,8 @@ public class ReviewManagerControllerTest {
 
     private ObjectMapper mapper;
 
+    private final String DATE_FORMAT = "yyyy-MM-dd";
+
     @BeforeEach
     public void setup(){
         mockMvcController = MockMvcBuilders.standaloneSetup(reviewManagerController).build();
@@ -46,11 +49,9 @@ public class ReviewManagerControllerTest {
     @Test
     public void testGetAllReviewsReturnsReviews() throws Exception {
 
-        Date myDate = new Date("10/02/2021");
-        Date myDate1 = new Date("06/05/2022");
         List<Review> reviews = new ArrayList<>();
-        reviews.add(new Review(1L, "This is the comment for Movie 1", myDate, 1L, 1L));
-        reviews.add(new Review(2L, "This is the comment for Movie 2", myDate1, 1L, 1L));
+        reviews.add(new Review(1L, "This is the comment for Movie 1", (new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), 1L, 1L));
+        reviews.add(new Review(2L, "This is the comment for Movie 2", (new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), 1L, 1L));
 
         when(mockReviewManagerServiceImpl.getAllReviews()).thenReturn(reviews);
 
@@ -65,8 +66,8 @@ public class ReviewManagerControllerTest {
 
     @Test
     public void testGetMappingGetReviewById() throws Exception {
-        Date myDate = new Date("10/02/2021");
-        Review review = new Review(4L, "This is the comment for Movie 4", myDate, 1L, 1L);
+
+        Review review = new Review(4L, "This is the comment for Movie 4", (new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), 1L, 1L);
 
         when(mockReviewManagerServiceImpl.getReviewById(review.getId())).thenReturn(review);
 
@@ -80,13 +81,12 @@ public class ReviewManagerControllerTest {
     @Test
     public void testPostMappingAddAReview() throws Exception {
 
-        Date myDate = new Date("10/12/2021");
-        Review review = new Review(4L, "This is the comment for Movie 4", myDate, 1L, 1L);
+        Review review = new Review(4L, "This is the comment for Movie 4", (new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), 1L, 1L);
 
         when(mockReviewManagerServiceImpl.insertReview(review)).thenReturn(review);
 
         this.mockMvcController.perform(
-                        MockMvcRequestBuilders.post("/api/v1/review")
+                        MockMvcRequestBuilders.post("/api/v1/review/create")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(mapper.writeValueAsString(review)))
                 .andExpect(MockMvcResultMatchers.status().isCreated());
@@ -97,11 +97,10 @@ public class ReviewManagerControllerTest {
     @Test
     public void testPutMappingUpdateAReview() throws Exception {
 
-        Date myDate = new Date("10/02/2021");
-        Review review = new Review(4L, "This is the updated comment for Movie 4", myDate, 1L, 1L);
+        Review review = new Review(4L, "This is the updated comment for Movie 4", (new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), 1L, 1L);
 
         this.mockMvcController.perform(
-                        MockMvcRequestBuilders.put("/api/v1/review/" + review.getId())
+                        MockMvcRequestBuilders.put("/api/v1/review/update/" + review.getId())
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(mapper.writeValueAsString(review)))
                 .andExpect(MockMvcResultMatchers.status().isOk());
@@ -111,11 +110,11 @@ public class ReviewManagerControllerTest {
 
     @Test
     public void testDeleteMappingDeleteAReview() throws Exception {
-        Date myDate = new Date("10/02/2021");
-        Review review = new Review(4L, "This is the updated comment for Movie 4", myDate, 1L, 1L);
 
+        Review review = new Review(4L, "This is the updated comment for Movie 4", (new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), 1L, 1L);
+        when(mockReviewManagerServiceImpl.getReviewById(review.getId())).thenReturn(review);
         this.mockMvcController.perform(
-                        MockMvcRequestBuilders.delete("/api/v1/review/" + review.getId())
+                        MockMvcRequestBuilders.delete("/api/v1/review/delete/" + review.getId())
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(mapper.writeValueAsString(review)))
                 .andExpect(MockMvcResultMatchers.status().isOk());

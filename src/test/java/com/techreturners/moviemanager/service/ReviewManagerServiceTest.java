@@ -9,8 +9,9 @@ import org.mockito.Mock;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,14 +27,14 @@ public class ReviewManagerServiceTest {
     @InjectMocks
     private ReviewManagerServiceImpl reviewManagerServiceImpl;
 
-    @Test
-    public void testGetAllReviewsReturnsListOfReviews() {
+    private final String DATE_FORMAT ="yyyy-MM-dd";
 
-        Date myDate = new Date("2021-02-10");
-        Date myDate1 = new Date("2021-02-10");
+    @Test
+    public void testGetAllReviewsReturnsListOfReviews() throws ParseException{
+
         List<Review> reviews = new ArrayList<>();
-        reviews.add(new Review(1L, "This is the comment for Movie 1", myDate, 1L, 1L));
-        reviews.add(new Review(2L, "This is the comment for Movie 2", myDate1, 1L, 1L));
+        reviews.add(new Review(1L, "This is the comment for Movie 1",  (new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), 1L, 1L));
+        reviews.add(new Review(2L, "This is the comment for Movie 2",  (new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), 1L, 1L));
 
         when(mockReviewManagerRepository.findAll()).thenReturn(reviews);
 
@@ -44,11 +45,9 @@ public class ReviewManagerServiceTest {
     }
 
     @Test
-    public void testAddAReview(){
+    public void testAddAReview() throws ParseException{
 
-        Date myDate = new Date("2021-02-10");
-
-        var review = new Review(3L, "This is the comment for Movie 3", myDate, 1L, 1L);
+        var review = new Review(3L, "This is the comment for Movie 3", (new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), 1L, 1L);
 
         when(mockReviewManagerRepository.save(review)).thenReturn(review);
 
@@ -58,11 +57,10 @@ public class ReviewManagerServiceTest {
     }
 
     @Test
-    public void testGetReviewById(){
+    public void testGetReviewById() throws ParseException{
 
-        Date myDate = new Date("10/02/2021");
         Long reviewId = 5L;
-        var review = new Review(5L, "This is the comment for Movie 5", myDate, 1L, 1L);
+        var review = new Review(5L, "This is the comment for Movie 5", (new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), 1L, 1L);
 
         when(mockReviewManagerRepository.findById(reviewId)).thenReturn(Optional.of(review));
 
@@ -72,12 +70,10 @@ public class ReviewManagerServiceTest {
     }
 
     @Test
-    public void testUpdateReviewById(){
-
-        Date myDate = new Date("2021-02-10");
+    public void testUpdateReviewById() throws ParseException{
 
         Long reviewId = 5L;
-        var review = new Review(5L, "This is the updated comment for Movie 5", myDate, 1L, 1L);
+        var review = new Review(5L, "This is the updated comment for Movie 5", (new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), 1L, 1L);
 
         when(mockReviewManagerRepository.findById(reviewId)).thenReturn(Optional.of(review));
         when(mockReviewManagerRepository.save(review)).thenReturn(review);
@@ -88,12 +84,10 @@ public class ReviewManagerServiceTest {
     }
 
     @Test
-    public void testDeleteReviewById(){
-
-        Date myDate = new Date("2021-02-10");
+    public void testDeleteReviewById() throws ParseException{
 
         Long reviewId = 5L;
-        var review = new Review(5L, "This is the updated comment for Movie 5", myDate, 1L, 1L);
+        var review = new Review(5L, "This is the updated comment for Movie 5",  (new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), 1L, 1L);
 
         when(mockReviewManagerRepository.findById(reviewId)).thenReturn(Optional.of(review));
         reviewManagerServiceImpl.deleteReviewById(reviewId);

@@ -165,5 +165,27 @@ public class MovieManagerServiceTest {
 		assertThat(actualResult).hasSize(3);
 		assertThat(actualResult).isEqualTo(movies);
 	}
+	
+	@Test
+	public void testGetMoviesByRating() throws ParseException {
+		List<Movie> movies = new ArrayList<>();
+		List<Rating> ratingList = new ArrayList<Rating>();
+		Person person  = new Person(1L, "Tom", PersonRole.Director);
+		List<Person> personList = new ArrayList<Person>();
+		personList.add(person);
+		Movie movie1 = new Movie(3L, "Movie Five", "This is the description for Movie Five",
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList);
+		Movie movie2 = new Movie(2L, "Movie Two", "This is the description for Movie Two",
+				(new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), Genre.Action, Certification.G, Language.English, Country.UK, personList);
+		movies.add(movie1);
+		movies.add(movie2);
+		ratingList.add(new Rating(1L, movie1, 80L, 20L, 3.5));
+		ratingList.add(new Rating(2L, movie2, 80L, 20L, 3.5));
+		when(mockMovieManagerRepository.getMoviesByRating(3.5)).thenReturn(movies);
+		List<Movie> actualResult = movieManagerService.getMoviesByRating(3.5);
+		
+		assertThat(actualResult).hasSize(2);
+		assertThat(actualResult).isEqualTo(movies);
+	}
 
 }

@@ -23,10 +23,10 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 
 	@Autowired
 	PersonRepository personRepository;
-	
+
 	@Autowired
 	AppConfig appconfig;
-	
+
 	public List<Movie> getAllMovies() {
 		List<Movie> movies = new ArrayList<>();
 		movieManagerRepository.findAll().forEach(movies::add);
@@ -59,9 +59,9 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 
 	@Override
 	public void deleteMovieById(Long id) {
-			Movie movie = movieManagerRepository.findById(id).get();
-			movie.getPerson().removeAll(movie.getPerson());
-			movieManagerRepository.delete(movie);
+		Movie movie = movieManagerRepository.findById(id).get();
+		movie.getPerson().removeAll(movie.getPerson());
+		movieManagerRepository.delete(movie);
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 	public List<Movie> getMoviesByReleasedYear(int year) {
 		return movieManagerRepository.getMoviesByReleasedYear(year);
 	}
-	
+
 	@Override
 	public List<Person> getMovieCrewList() {
 		List<Person> person = new ArrayList<>();
@@ -109,13 +109,19 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 		int countryVal = Country.valueOf(Country.class, country).ordinal();
 		return movieManagerRepository.getMoviesByCountry(countryVal);
 	}
+
+	@Override
+	public List<Movie> getMoviesByRating(Double rating) {
+		return movieManagerRepository.getMoviesByRating(rating);
+	}
+
 	private Movie insertPersonAndMovie(Movie movie) {
-			List<Person> personList = new ArrayList<Person>();
-			for (Person person : movie.getPerson()) {
-				personList.add(personRepository.save(person));
-			}
-			movie.setPerson(personList);
-			movieManagerRepository.save(movie);
+		List<Person> personList = new ArrayList<Person>();
+		for (Person person : movie.getPerson()) {
+			personList.add(personRepository.save(person));
+		}
+		movie.setPerson(personList);
+		movieManagerRepository.save(movie);
 		return movie;
 	}
 }

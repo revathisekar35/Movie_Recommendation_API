@@ -94,4 +94,19 @@ public class ReviewManagerServiceTest {
 
         verify(mockReviewManagerRepository).deleteById(reviewId);
     }
+    
+    @Test
+    public void testGetAllReviewsByMovie() throws ParseException{
+
+        List<Review> reviews = new ArrayList<>();
+        reviews.add(new Review(1L, "This is the comment for Movie 1",  (new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), 1L, 1L));
+        reviews.add(new Review(2L, "This is the comment for Movie 2",  (new SimpleDateFormat(DATE_FORMAT).parse(LocalDate.now().toString())), 1L, 1L));
+
+        when(mockReviewManagerRepository.getReviewsByMovieId(1L)).thenReturn(reviews);
+
+        List<Review> actualResult = reviewManagerServiceImpl.getReviewsByMovieId(1L);
+
+        assertThat(actualResult).hasSize(2);
+        assertThat(actualResult).isEqualTo(reviews);
+    }
 }

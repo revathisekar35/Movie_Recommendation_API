@@ -43,4 +43,10 @@ public class ReviewManagerServiceImpl implements ReviewManagerService {
     public void deleteReviewById(Long id) {
         reviewManagerRepository.deleteById(id);
     }
+    
+    @Override
+    public List<Review> getReviewsByMovieId(Long movieId){
+    	return reviewManagerRepository.getReviewsByMovieId(movieId);
+    }
+
 }

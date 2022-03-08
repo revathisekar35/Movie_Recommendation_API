@@ -17,3 +17,11 @@ INSERT INTO `moviedetails`.`person` (`id`, `name`, `role`) VALUES ('5', 'Alec Ba
 INSERT INTO `moviedetails`.`movie_person` (`movie_id`, `person_id`) VALUES ('3', '4');
 INSERT INTO `moviedetails`.`movie_person` (`movie_id`, `person_id`) VALUES ('3', '5');
 INSERT INTO `moviedetails`.`rating` (`id`, `dislikes`, `likes`, `total_rating`, `movie_id`) VALUES ('3', '20', '80', '6.3', '3');
+
+INSERT INTO `moviedetails`.`user` (`id`, `age`, `email`, `is_admin`, `name`) VALUES ('1', '30', 'george@gmail.com', FALSE, 'George');
+INSERT INTO `moviedetails`.`user` (`id`, `age`, `email`, `is_admin`, `name`)  VALUES ('2', '34', 'jack@gmail.com', FALSE, 'Jack');
+INSERT INTO `moviedetails`.`user` (`id`, `age`, `email`, `is_admin`, `name`)  VALUES ('3', '20', 'harry@gmail.com', FALSE, 'Harry');
+INSERT INTO `moviedetails`.`review` (`id`, `comment`, `created_date`, `movie_id`, `user_id`) VALUES ('1', 'An absolutely fantastic film. I really enjoy watching both Peter Rabbit films', '2020-02-03', '1', '1');
+INSERT INTO `moviedetails`.`review` (`id`, `comment`, `created_date`, `movie_id`, `user_id`) VALUES ('2', 'This is a review for Annie', '2022-02-03', '2', '2');
+INSERT INTO `moviedetails`.`review` (`id`, `comment`, `created_date`, `movie_id`, `user_id`) VALUES ('3', 'This is a review for Boss Baby', '2021-12-03', '3', '3');
+

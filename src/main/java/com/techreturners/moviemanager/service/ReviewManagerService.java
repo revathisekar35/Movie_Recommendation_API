@@ -14,4 +14,6 @@ public interface ReviewManagerService {
     void updateReviewById(Long id, Review review);
 
     void deleteReviewById(Long id);
+    
+    List<Review> getReviewsByMovieId(Long movieId);
 }

@@ -44,5 +44,12 @@ public class ReviewManagerController {
         reviewManagerService.deleteReviewById(reviewId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    
+    @GetMapping({"/movie/{movieId}"})
+    public ResponseEntity<List<Review>> getReviewByMovieId(@PathVariable Long movieId) {
+    	 List<Review> reviews = reviewManagerService.getReviewsByMovieId(movieId);
+        return new ResponseEntity<>(reviews,HttpStatus.OK);
+    }
+
 }
 

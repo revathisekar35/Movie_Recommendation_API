@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.techreturners.moviemanager.service.MovieManagerService;
+import com.techreturners.moviemanager.config.AppConfig;
+import com.techreturners.moviemanager.config.TwilioInitilizer;
 import com.techreturners.moviemanager.model.Movie;
 import com.techreturners.moviemanager.model.Person;
 
@@ -24,6 +26,9 @@ public class MovieManagerController {
 
 	@Autowired
 	private MovieManagerService movieManagerService;
+	
+	@Autowired
+	AppConfig appconfig;
 
 	@GetMapping("/getAllMovies")
 	public ResponseEntity<List<Movie>> getAllMovies() {
@@ -39,6 +44,7 @@ public class MovieManagerController {
 	@PostMapping("/create")
 	public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
 		Movie newMovie = movieManagerService.insertMovie(movie);
+		//new TwilioInitilizer(appconfig.getSid(), appconfig.getAuthId(), appconfig.getToNumber(), appconfig.getFromNumber(), newMovie.getName()+" newly added into database");
 		return new ResponseEntity<>(newMovie, HttpStatus.CREATED);
 	}
 

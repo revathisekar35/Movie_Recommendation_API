@@ -24,9 +24,6 @@ public class MovieManagerServiceImpl implements MovieManagerService {
 	@Autowired
 	PersonRepository personRepository;
 
-	@Autowired
-	AppConfig appconfig;
-
 	public List<Movie> getAllMovies() {
 		List<Movie> movies = new ArrayList<>();
 		movieManagerRepository.findAll().forEach(movies::add);

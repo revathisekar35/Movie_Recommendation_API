@@ -50,7 +50,7 @@ This is the Movie recommendation API application which will give you the informa
 
 `mvn test`
 
-Future Thoughts:
+Extension :
 - Additional filter criteria based on userage
 - We can adhere Spring Security concept to design role based API
 

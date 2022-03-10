@@ -51,7 +51,9 @@ This is the Movie recommendation API application which will give you the informa
 `mvn test`
 
 Extension :
-- Additional filter criteria based on userage
-- We can adhere Spring Security concept to design role based API
+- Additional filter criteria based on userage.
+- We can adhere Spring Security concept to design role based API.
+- We can implement Slf4J for logging.
+
 
 
